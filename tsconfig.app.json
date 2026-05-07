@@ -22,7 +22,7 @@
     /* Kiểm tra code - Đang tắt để build mượt hơn, có thể bật lại sau */
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "erasableSyntaxOnly": true,
+    "erasableSyntaxOnly": false,
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {

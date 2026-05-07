@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { CommonResult } from '~/types/common/api.type'
+import type { CommonResult } from '~/apis/proto_new/Utils/result'
 import type { UnaryCall } from '@protobuf-ts/runtime-rpc'
 import i18next from 'i18next'
 import { API_ERROR_MESSAGES } from '~/locales/api-error-messages'
@@ -48,10 +48,10 @@ export const handleResponse = <T>(response: CommonResult, defaultValue: T): T =>
 // ===== REFRESH TOKEN =====
 const refreshAccessToken = async (): Promise<string | null> => {
     try {
-        const { data: refreshToken } = await apisAsync.getStorage({ key: REFRESH_TOKEN_KEY })
+        const { data: refreshToken } = await apisAsync.getStorage({ key: REFRESH_TOKEN_KEY }) as any
         if (!refreshToken) return null
 
-        const res = await authCommandApi.refreshToken({ refreshToken })
+        const res = await authCommandApi.refreshToken({ refreshToken: refreshToken as string })
 
         const json = handleResponse<any>(
             res as unknown as CommonResult,
@@ -97,8 +97,8 @@ export const executeApiQuery = async <
     const callApi = async (token?: string, isRetry = false) => {
         let activeToken = token;
         if (isRetry) {
-          const { data } = await apisAsync.getStorage({ key: ACCESS_TOKEN_KEY });
-          activeToken = data;
+          const res = await apisAsync.getStorage({ key: ACCESS_TOKEN_KEY }) as any;
+          activeToken = res.data;
         }
 
         const metadata: Record<string, string> = {
@@ -124,7 +124,8 @@ export const executeApiQuery = async <
 
     try {
         console.log(`[API] Fetching token from native storage...`);
-        const { data: token } = await apisAsync.getStorage({ key: ACCESS_TOKEN_KEY })
+        const res = await apisAsync.getStorage({ key: ACCESS_TOKEN_KEY }) as any
+        const token = res.data
         return await callApi(token || undefined)
     } catch (error: any) {
         const statusCode = error?.statusCode

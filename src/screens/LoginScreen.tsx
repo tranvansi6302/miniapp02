@@ -128,7 +128,7 @@ const LoginScreen: React.FC = () => {
                 control={control}
                 render={({ field }) => (
                   <Input
-                    label={<Lang id="hb-w-login-phone-label" fallback="Số điện thoại" />}
+                    label={t('hb-w-login-phone-label', 'Số điện thoại')}
                     placeholder="3653653636"
                     type="tel"
                     prefix={
@@ -158,7 +158,7 @@ const LoginScreen: React.FC = () => {
                 control={control}
                 render={({ field }) => (
                   <Input
-                    label={<Lang id="hb-w-login-password-label" fallback="Mật khẩu" />}
+                    label={t('hb-w-login-password-label', 'Mật khẩu')}
                     placeholder="******"
                     type={showPassword ? 'text' : 'password'}
                     error={errors.password?.message ? t(errors.password.message, 'Trường thông tin bắt buộc') : undefined}

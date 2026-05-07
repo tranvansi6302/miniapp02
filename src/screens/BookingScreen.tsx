@@ -11,7 +11,7 @@ const BookingScreen: React.FC = () => {
         <div className="flex flex-col gap-4">
           <div className="p-4 border border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center py-10">
             <span className="text-gray-400 mb-2 italic">Chưa có lịch hẹn nào</span>
-            <Button variant="brand" className="mt-2">Đặt lịch ngay</Button>
+            <Button theme="brand" className="mt-2">Đặt lịch ngay</Button>
           </div>
         </div>
       </Card>

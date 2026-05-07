@@ -11,7 +11,6 @@ import i18n from './locales/i18n';
 import './bridge/mockBridge';
 import '../../ejsc-ma-component/dist/styles.css';
 import { langQueryApi } from './apis/defines/lang/query/lang.query.api';
-import { serviceQueryApi } from './apis/services/query/service.query.api';
 
 
 
@@ -29,19 +28,9 @@ export default function App({ devTool }: AppProps = {}) {
     queryKey: ['getAllLang'],
     queryFn: langQueryApi.getAllLanguages
   })
-  const { data: servicesData } = useQuery({
-    queryKey: ['getAllServices'],
-    queryFn: () => serviceQueryApi.getAllBookingCatalogServices({
 
-      servPid: 0
-    })
-  })
 
-  useEffect(() => {
-    if (servicesData) {
-      console.log('>>> [Services] Top 8 services:', servicesData);
-    }
-  }, [servicesData]);
+
 
 
   useEffect(() => {

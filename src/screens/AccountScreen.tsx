@@ -54,9 +54,9 @@ const AccountScreen: React.FC = () => {
       // 1. Clear Native Storage TRƯỚC khi gọi API để đảm bảo hiệu lực ngay lập tức
       console.log('Clearing native storage...');
       try {
-        await apisAsync.setStorage({ key: 'accessToken', data: null });
-        await apisAsync.setStorage({ key: 'refreshToken', data: null });
-        await apisAsync.setStorage({ key: 'userProfile', data: null });
+        await apisAsync.setStorage({ key: 'accessToken', data: null as any });
+        await apisAsync.setStorage({ key: 'refreshToken', data: null as any });
+        await apisAsync.setStorage({ key: 'userProfile', data: null as any });
         await apisAsync.removeStorage({ key: 'accessToken' });
         await apisAsync.removeStorage({ key: 'refreshToken' });
         await apisAsync.removeStorage({ key: 'userProfile' });
@@ -70,7 +70,7 @@ const AccountScreen: React.FC = () => {
 
         // Xem các key còn lại trong native
         const info = await apisAsync.getStorageInfo();
-        console.log('Remaining keys in native storage:', info.keys);
+        console.log('Remaining keys in native storage:', info.data?.keys);
       } catch (storageErr: any) {
         console.error('Error clearing storage:', storageErr);
       }
