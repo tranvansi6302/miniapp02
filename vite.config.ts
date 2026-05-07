@@ -15,10 +15,10 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      '~': path.resolve(__dirname, './src'),
-      'ejsc-ma-router': path.resolve(__dirname, '../ejsc-ma-router/src'),
-      'react': path.resolve(__dirname, './node_modules/react'),
-      'react-dom': path.resolve(__dirname, './node_modules/react-dom')
+      '~': path.resolve(dirname, './src'),
+      'ejsc-ma-router': path.resolve(dirname, '../ejsc-ma-router/src'),
+      'react': path.resolve(dirname, './node_modules/react'),
+      'react-dom': path.resolve(dirname, './node_modules/react-dom')
     },
     dedupe: ['react', 'react-dom', 'zustand']
   },

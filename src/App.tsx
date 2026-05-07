@@ -9,7 +9,7 @@ import { useAuthStore } from '~/stores/auth.store';
 import i18n from './locales/i18n';
 
 import './bridge/mockBridge';
-import '../../ejsc-ma-component/dist/styles.css';
+import 'ejsc-ma-component/dist/styles.css';
 import { langQueryApi } from './apis/defines/lang/query/lang.query.api';
 
 
