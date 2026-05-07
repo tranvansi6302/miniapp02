@@ -1,0 +1,53 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+package PartnerDocumentTypes;
+
+service PartnerDocumentTypesCommand {
+  rpc CreatePartnerDocumentTypes(CreatePartnerDocumentTypesRequest) returns (CommonResult);
+  rpc UpdatePartnerDocumentTypes(UpdatePartnerDocumentTypesRequest) returns (CommonResult);
+  rpc DeletePartnerDocumentTypes(DeletePartnerDocumentTypesRequest) returns (CommonResult);
+  rpc AdminCreatePartnerDocumentTypes(AdminCreatePartnerDocumentTypesRequest) returns (CommonResult);
+  rpc AdminUpdatePartnerDocumentTypes(AdminUpdatePartnerDocumentTypesRequest) returns (CommonResult);
+  rpc AdminDeletePartnerDocumentTypes(DeletePartnerDocumentTypesRequest) returns (CommonResult);
+}
+
+message CreatePartnerDocumentTypesRequest {
+      optional google.protobuf.StringValue PartnerTypeName = 1;
+      optional google.protobuf.Int32Value PartnerTypeRequired = 2;
+      optional google.protobuf.StringValue PartnerTypeGuide = 3;
+      optional google.protobuf.Int32Value IsActived = 4;
+}
+message UpdatePartnerDocumentTypesRequest {
+      optional google.protobuf.Int32Value Id = 1;
+      optional google.protobuf.StringValue PartnerTypeName = 2;
+      optional google.protobuf.Int32Value PartnerTypeRequired = 3;
+      optional google.protobuf.StringValue PartnerTypeGuide = 4;
+      optional google.protobuf.Int32Value IsActived = 5;
+}
+message DeletePartnerDocumentTypesRequest {
+      optional google.protobuf.Int32Value Id = 1;
+}
+// Admin
+message AdminCreatePartnerDocumentTypesRequest {
+      optional google.protobuf.StringValue PartnerTypeName = 1;
+      optional google.protobuf.Int32Value PartnerTypeRequired = 2;
+      optional google.protobuf.StringValue PartnerTypeGuide = 3;
+      optional google.protobuf.Int32Value IsActived = 4;
+      repeated PartnerDocFieldConfigsMessage PartnerDocFieldConfigsMessages =5; 
+}
+message AdminUpdatePartnerDocumentTypesRequest {
+      optional google.protobuf.Int32Value Id = 1;
+      optional google.protobuf.StringValue PartnerTypeName = 2;
+      optional google.protobuf.Int32Value PartnerTypeRequired = 3;
+      optional google.protobuf.StringValue PartnerTypeGuide = 4;
+      optional google.protobuf.Int32Value IsActived = 5;
+      repeated  PartnerDocFieldConfigsMessage PartnerDocFieldConfigsMessages =6; 
+}
+
+message PartnerDocFieldConfigsMessage {
+      optional google.protobuf.StringValue FieldName = 1;
+      optional google.protobuf.StringValue FieldType = 2;
+      optional google.protobuf.Int32Value FieldDisplayOrder = 3;
+      optional google.protobuf.Int32Value FieldIsRequired = 4;
+}

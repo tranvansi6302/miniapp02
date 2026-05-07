@@ -1,0 +1,30 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+package PartnerServiceRequirements;
+
+service PartnerServiceRequirementsCommand {
+  rpc CreatePartnerServiceRequirements(CreatePartnerServiceRequirementsRequest) returns (CommonResult);
+  rpc UpdatePartnerServiceRequirements(UpdatePartnerServiceRequirementsRequest) returns (CommonResult);
+  rpc DeletePartnerServiceRequirements(DeletePartnerServiceRequirementsRequest) returns (CommonResult);
+  rpc AdminCreatePartnerServiceRequirements(CreatePartnerServiceRequirementsRequest) returns (CommonResult);
+  rpc AdminUpdatePartnerServiceRequirements(UpdatePartnerServiceRequirementsRequest) returns (CommonResult);
+  rpc AdminDeletePartnerServiceRequirements(DeletePartnerServiceRequirementsRequest) returns (CommonResult);
+}
+
+message CreatePartnerServiceRequirementsRequest {
+      optional google.protobuf.Int32Value ServiceId = 1;
+      optional google.protobuf.Int32Value PartnerTypeId = 2;
+      optional google.protobuf.Int32Value PartnerReqDisplayOrder = 3;
+      optional google.protobuf.Int32Value IsActived = 4;
+}
+message UpdatePartnerServiceRequirementsRequest {
+      optional google.protobuf.Int32Value Id = 1;
+      optional google.protobuf.Int32Value ServiceId = 2;
+      optional google.protobuf.Int32Value PartnerTypeId = 3;
+      optional google.protobuf.Int32Value PartnerReqDisplayOrder = 4;
+      optional google.protobuf.Int32Value IsActived = 5;
+}
+message DeletePartnerServiceRequirementsRequest {
+      optional google.protobuf.Int32Value Id = 1;
+}

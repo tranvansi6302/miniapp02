@@ -1,0 +1,58 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+package PartnerDocuments;
+
+service PartnerDocumentsCommand {
+  rpc CreateOrUpdatePartnerDocuments(CreateOrUpdatePartnerDocumentsRequest) returns (CommonResult);
+  rpc UpdatePartnerDocuments(UpdatePartnerDocumentsRequest) returns (CommonResult);
+  rpc DeletePartnerDocuments(DeletePartnerDocumentsRequest) returns (CommonResult);
+  rpc CreateOrUpdatePartnerDocumentsMutiples(CreateOrUpdatePartnerDocumentsMutiplesRequest) returns (CommonResult);
+  rpc AdminUpdatePartnerDocuments(UpdatePartnerDocumentsRequest) returns (CommonResult);
+  rpc AdminDeletePartnerDocuments(DeletePartnerDocumentsRequest) returns (CommonResult);
+  rpc AdminCreatePartnerDocuments(AdminCreatePartnerDocumentsRequest) returns (CommonResult);
+  rpc AdminReviewDocumentation(AdminReviewDocumentationRequest) returns (CommonResult);
+}
+
+message CreateOrUpdatePartnerDocumentsRequest {
+      optional google.protobuf.Int32Value PartnerId = 1;
+      optional google.protobuf.Int32Value PartnerTypeId = 2;
+      repeated ImageFieldMessage ImageFieldMessages =3;
+      repeated AttributeFieldMessage AttributeFieldMessages =4;
+}
+message CreateOrUpdatePartnerDocumentsMutiplesRequest{
+      repeated CreateOrUpdatePartnerDocumentsRequest CreateOrUpdatePartnerDocumentsMutiples =1;
+}
+message UpdatePartnerDocumentsRequest {
+      optional google.protobuf.Int32Value Id = 1;
+      optional google.protobuf.Int32Value PartnerId = 2;
+      optional google.protobuf.Int32Value PartnerTypeId = 3;
+      optional google.protobuf.Int32Value PartnerDocStatus = 4;
+      optional google.protobuf.Int32Value IsActived = 5;
+}
+message DeletePartnerDocumentsRequest {
+      optional google.protobuf.Int32Value Id = 1;
+}
+
+message ImageFieldMessage{
+      google.protobuf.StringValue Title = 1;
+      optional google.protobuf.StringValue Url = 2;
+}
+message AttributeFieldMessage{
+      google.protobuf.StringValue Key = 1;
+      optional google.protobuf.StringValue Value = 2;
+}
+// Admin
+message AdminReviewDocumentationRequest{
+      google.protobuf.Int32Value Id = 1;
+      optional google.protobuf.Int32Value UserId = 2;
+      optional google.protobuf.Int32Value Status = 3;
+      optional google.protobuf.StringValue RejectReason = 4;
+}
+message AdminCreatePartnerDocumentsRequest {
+      optional google.protobuf.Int32Value PartnerId = 1;
+      optional google.protobuf.Int32Value PartnerTypeId = 2;
+      optional google.protobuf.Int32Value PartnerDocStatus = 3;
+      optional google.protobuf.Int32Value IsActived = 4;
+}
+

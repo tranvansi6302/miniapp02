@@ -1,0 +1,28 @@
+syntax = "proto3";
+import "result.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+// Package cũng nên để số nhiều để đồng bộ
+package StyleScss;
+
+service StyleScssCommand {
+  rpc CreateStyleScss(CreateStyleScssRequest) returns (CommonResult);
+  rpc UpdateStyleScss(UpdateStyleScssRequest) returns (CommonResult);
+  rpc DeleteStyleScss(DeleteStyleScssRequest) returns (CommonResult);
+}
+
+message CreateStyleScssRequest {
+  google.protobuf.StringValue Id = 1;
+  google.protobuf.StringValue CssDescription = 2;
+  google.protobuf.StringValue CssProperty = 3;
+}
+
+message UpdateStyleScssRequest {
+  google.protobuf.StringValue Id = 1;
+  google.protobuf.StringValue CssDescription = 2;
+  google.protobuf.StringValue CssProperty = 3;
+}
+
+message DeleteStyleScssRequest {
+  google.protobuf.StringValue Id = 1;
+}

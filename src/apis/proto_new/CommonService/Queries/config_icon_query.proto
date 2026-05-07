@@ -1,0 +1,17 @@
+syntax = "proto3";
+import "result.proto";
+package ConfigIcon;
+import "google/protobuf/wrappers.proto";
+
+service ConfigIconQuery {
+  rpc GetDetailConfigIcon(GetDetailConfigIconRequest) returns (CommonResult);
+  rpc GetAllConfigIcons(GetAllConfigIconsRequest) returns (CommonResult);
+}
+
+message GetDetailConfigIconRequest {
+ optional google.protobuf.StringValue Id = 1;
+}
+
+message GetAllConfigIconsRequest {
+  google.protobuf.StringValue SearchKeyword = 1;
+}

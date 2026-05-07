@@ -1,0 +1,21 @@
+﻿syntax = "proto3";
+import "result.proto";
+import "google/protobuf/wrappers.proto";
+package WebsiteOtherIPAddress;
+
+service WebsiteOtherIPAddressQuery {
+    rpc GetAllWebsiteOtherIPAddressActived(GetAllWebsiteOtherIPAddressActivedRequest) returns (CommonResult);
+    rpc AdminGetAllWebsiteOtherIPAddress(AdminGetAllWebsiteOtherIPAddressRequest) returns (CommonResult);
+    rpc GetDetailWebsiteOtherIPAddress(GetDetailWebsiteOtherIPAddressRequest) returns (CommonResult);
+}
+
+message GetDetailWebsiteOtherIPAddressRequest{
+    optional google.protobuf.Int32Value Id = 1;
+}
+
+message GetAllWebsiteOtherIPAddressActivedRequest {
+}
+
+message AdminGetAllWebsiteOtherIPAddressRequest {
+     google.protobuf.BoolValue IsActived= 1;
+}

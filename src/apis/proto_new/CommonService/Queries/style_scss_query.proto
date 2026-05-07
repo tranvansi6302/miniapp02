@@ -1,0 +1,15 @@
+syntax = "proto3";
+import "result.proto";
+import "google/protobuf/wrappers.proto";
+package StyleScss;
+
+service StyleScssQuery {
+  rpc GetDetailStyleScss(GetDetailStyleScssRequest) returns (CommonResult);
+  rpc GetAllStyleScsses(GetAllStyleScssesRequest) returns (CommonResult);
+}
+
+message GetDetailStyleScssRequest {
+  optional google.protobuf.StringValue Id = 1;
+}
+
+message GetAllStyleScssesRequest {}

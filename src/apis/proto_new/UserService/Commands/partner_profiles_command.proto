@@ -1,0 +1,61 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+package PartnerProfiles;
+
+service PartnerProfilesCommand {
+  rpc CreatePartnerProfiles(CreatePartnerProfilesRequest) returns (CommonResult);
+  rpc UpdatePartnerProfiles(UpdatePartnerProfilesRequest) returns (CommonResult);
+  rpc DeletePartnerProfiles(DeletePartnerProfilesRequest) returns (CommonResult);
+  rpc AdminCreatePartnerProfiles(AdminCreatePartnerProfilesRequest) returns (CommonResult);
+  rpc AdminUpdatePartnerProfiles(AdminUpdatePartnerProfilesRequest) returns (CommonResult);
+  rpc AdminDeletePartnerProfiles(DeletePartnerProfilesRequest) returns (CommonResult);
+  rpc AdminReviewPartnerProfile(AdminReviewPartnerProfileRequest) returns (CommonResult);
+}
+
+message CreatePartnerProfilesRequest {
+      optional google.protobuf.Int32Value InformationId = 1;
+      optional google.protobuf.StringValue PartnerBiography = 2;
+      optional google.protobuf.Int32Value WardId = 3;
+      PartnerServicesMessage PartnerServicesMessage = 4;
+}
+message UpdatePartnerProfilesRequest {
+      optional google.protobuf.Int32Value Id = 1;
+      optional google.protobuf.Int32Value InformationId = 2;
+      optional google.protobuf.StringValue PartnerBiography = 3;
+      optional google.protobuf.Int32Value WardId = 4;
+      PartnerServicesMessage PartnerServicesMessage = 5;
+}
+message DeletePartnerProfilesRequest {
+      optional google.protobuf.Int32Value Id = 1;
+}
+
+message PartnerServicesMessage {
+      optional google.protobuf.Int32Value ServiceId = 1;
+      optional google.protobuf.StringValue PartnerServiceYearsExp = 2;
+}
+// Admin
+message AdminCreatePartnerProfilesRequest {
+      optional google.protobuf.Int32Value InformationId = 1;
+      optional google.protobuf.StringValue PartnerCode = 2;
+      optional google.protobuf.Int32Value PartnerStatus = 3;
+      optional google.protobuf.StringValue PartnerBiography = 4;
+      optional google.protobuf.Int32Value PartnerIsAvailable = 5;
+      optional google.protobuf.Int32Value WardId = 6;
+      optional google.protobuf.Int32Value IsActived = 7;
+}
+message AdminUpdatePartnerProfilesRequest {
+      optional google.protobuf.Int32Value Id = 1;
+      optional google.protobuf.Int32Value InformationId = 2;
+      optional google.protobuf.StringValue PartnerCode = 3;
+      optional google.protobuf.Int32Value PartnerStatus = 4;
+      optional google.protobuf.StringValue PartnerBiography = 5;
+      optional google.protobuf.Int32Value PartnerIsAvailable = 6;
+      optional google.protobuf.Int32Value WardId = 7;
+      optional google.protobuf.Int32Value IsActived = 8;
+}
+
+message AdminReviewPartnerProfileRequest {
+      optional google.protobuf.Int32Value Id = 1;
+      optional google.protobuf.Int32Value Status = 2;
+}

@@ -1,0 +1,27 @@
+syntax = "proto3";
+import "result.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+package ConfigEmoji;
+
+service ConfigEmojiCommand{
+  rpc CreateConfigEmoji(CreateConfigEmojiRequest) returns (CommonResult);
+  rpc UpdateConfigEmoji(UpdateConfigEmojiRequest) returns (CommonResult);
+  rpc DeleteConfigEmoji(DeleteConfigEmojiRequest) returns (CommonResult);
+}
+
+message CreateConfigEmojiRequest {
+  google.protobuf.StringValue Id = 1;
+  google.protobuf.StringValue Description = 2;
+  google.protobuf.StringValue Url = 3;
+}
+
+message UpdateConfigEmojiRequest {
+  google.protobuf.StringValue Id = 1;
+  optional google.protobuf.StringValue Description = 2;
+  optional google.protobuf.StringValue Url = 3;
+}
+
+message DeleteConfigEmojiRequest {
+  google.protobuf.StringValue Id = 1;
+}

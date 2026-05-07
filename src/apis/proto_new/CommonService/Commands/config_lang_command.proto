@@ -1,0 +1,29 @@
+syntax = "proto3";
+import "result.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+package ConfigLang;
+
+service ConfigLangCommand {
+  rpc CreateConfigLang(CreateConfigLangRequest) returns (CommonResult);
+  rpc UpdateConfigLang(UpdateConfigLangRequest) returns (CommonResult);
+  rpc DeleteConfigLang(DeleteConfigLangRequest) returns (CommonResult);
+}
+
+message CreateConfigLangRequest {
+  google.protobuf.StringValue Id = 1;
+  optional google.protobuf.StringValue Description = 2;
+  google.protobuf.StringValue Vn = 3;
+  google.protobuf.StringValue En = 4;
+}
+
+message UpdateConfigLangRequest {
+  google.protobuf.StringValue Id = 1;
+  optional google.protobuf.StringValue Description = 2;
+  optional google.protobuf.StringValue Vn = 3;
+  optional google.protobuf.StringValue En = 4;
+}
+
+message DeleteConfigLangRequest {
+  google.protobuf.StringValue Id = 1;
+}

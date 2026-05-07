@@ -1,0 +1,37 @@
+﻿syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+package WebsiteLocalizationWard;
+service WebsiteLocalizationWardCommand {
+	rpc CreateWebsiteLocalizationWard(CreateWebsiteLocalizationWardRequest) returns (CommonResult);
+	rpc UpdateWebsiteLocalizationWard(UpdateWebsiteLocalizationWardRequest) returns (CommonResult);
+	rpc DeleteWebsiteLocalizationWard(DeleteWebsiteLocalizationWardRequest) returns (CommonResult);
+}
+
+message CreateWebsiteLocalizationWardRequest{
+	google.protobuf.StringValue Name = 1;
+	google.protobuf.StringValue NameEn = 2;
+	google.protobuf.StringValue FullName = 3;
+	google.protobuf.StringValue FullNameEn = 4;
+	google.protobuf.DoubleValue Latitude = 5;
+	google.protobuf.DoubleValue Longitude = 6;
+	google.protobuf.Int32Value WardPid = 7;
+	repeated CreateWebsiteLocalizationWardRequest ChildWardsMessages = 8;
+	google.protobuf.StringValue KeyLocalization = 9;
+}
+message UpdateWebsiteLocalizationWardRequest{
+	google.protobuf.Int32Value Id = 1;
+	google.protobuf.StringValue Name = 2;
+	google.protobuf.StringValue NameEn = 3;
+	google.protobuf.StringValue FullName = 4;
+	google.protobuf.StringValue FullNameEn = 5;
+	google.protobuf.DoubleValue Latitude = 6;
+	google.protobuf.DoubleValue Longitude = 7;
+	google.protobuf.Int32Value WardPid = 8;
+	google.protobuf.StringValue KeyLocalization = 9;
+}
+
+message DeleteWebsiteLocalizationWardRequest{
+	google.protobuf.Int32Value Id = 1;
+}

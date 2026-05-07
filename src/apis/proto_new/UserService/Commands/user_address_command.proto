@@ -1,0 +1,43 @@
+﻿syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+package UserAddress;
+
+service UserAddressCommand {
+  rpc CreateUserAddress(CreateUserAddressRequest) returns (CommonResult);
+  rpc UpdateUserAddress(UpdateUserAddressRequest) returns (CommonResult);
+  rpc DeleteUserAddress(DeleteUserAddressRequest) returns (CommonResult);
+}
+
+// Request and Response Messages
+message CreateUserAddressRequest {
+	google.protobuf.Int32Value UserId = 1;
+	google.protobuf.StringValue AdrName = 2;
+	google.protobuf.StringValue AdrDescription = 3;
+	google.protobuf.StringValue AdrDetail = 4;
+	google.protobuf.DoubleValue AdrLatitude = 5;
+	google.protobuf.DoubleValue AdrLongitude = 6;
+	google.protobuf.BoolValue AdrDefault = 7;
+	google.protobuf.Int32Value WardId = 8;
+	google.protobuf.BoolValue IsActived = 9;
+
+}
+
+message UpdateUserAddressRequest {
+	google.protobuf.Int32Value Id = 1;
+	google.protobuf.Int32Value UserId = 2;
+	google.protobuf.StringValue AdrName = 3;
+	google.protobuf.StringValue AdrDescription = 4;
+	google.protobuf.StringValue AdrDetail = 5;
+	google.protobuf.DoubleValue AdrLatitude = 6;
+	google.protobuf.DoubleValue AdrLongitude = 7;
+	google.protobuf.BoolValue AdrDefault = 8;
+	google.protobuf.Int32Value WardId = 9;
+	google.protobuf.BoolValue IsActived = 10;
+
+}
+
+message DeleteUserAddressRequest {
+	google.protobuf.Int32Value Id = 1;
+}

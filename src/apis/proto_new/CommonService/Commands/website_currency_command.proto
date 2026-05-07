@@ -1,0 +1,25 @@
+﻿syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "result.proto";  
+package WebsiteCurrency;
+
+service WebsiteCurrencyCommand {
+  rpc CreateWebsiteCurrency(CreateWebsiteCurrencyRequest) returns (CommonResult);
+  rpc UpdateWebsiteCurrency(UpdateWebsiteCurrencyRequest) returns (CommonResult);
+  rpc DeleteWebsiteCurrency(DeleteWebsiteCurrencyRequest) returns (CommonResult);
+}
+
+message CreateWebsiteCurrencyRequest {
+  optional google.protobuf.StringValue Id = 1;
+  optional google.protobuf.BoolValue IsActived = 2;
+}
+
+message UpdateWebsiteCurrencyRequest {
+  optional google.protobuf.StringValue Id = 1;
+  optional google.protobuf.BoolValue IsActived = 2;
+}
+
+message DeleteWebsiteCurrencyRequest {
+  optional google.protobuf.StringValue Id = 1;
+}

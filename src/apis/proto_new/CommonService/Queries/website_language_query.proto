@@ -1,0 +1,21 @@
+syntax = "proto3";
+import "result.proto";
+import "google/protobuf/wrappers.proto";
+package WebsiteLanguage;
+
+service WebsiteLanguageQuery {
+  rpc GetAllWebsiteLanguagesActived(GetAllWebsiteLanguagesActivedRequest) returns (CommonResult);
+  rpc AdminGetAllWebsiteLanguages(AdminGetAllWebsiteLanguagesRequest) returns (CommonResult);
+  rpc GetDetailWebsiteLanguage(GetDetailWebsiteLanguageRequest) returns (CommonResult);
+}
+
+message GetDetailWebsiteLanguageRequest {
+  google.protobuf.StringValue Id = 1;
+}
+
+message GetAllWebsiteLanguagesActivedRequest {
+}
+
+message AdminGetAllWebsiteLanguagesRequest {
+  optional google.protobuf.BoolValue IsActived = 1;
+}

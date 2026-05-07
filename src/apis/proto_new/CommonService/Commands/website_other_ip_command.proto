@@ -1,0 +1,29 @@
+﻿syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "result.proto";  
+package WebsiteOtherIPAddress;
+
+service WebsiteOtherIPAddressCommand {
+  rpc CreateWebsiteOtherIPAddress(CreateWebsiteOtherIPAddressRequest) returns (CommonResult);
+  rpc UpdateWebsiteOtherIPAddress(UpdateWebsiteOtherIPAddressRequest) returns (CommonResult);
+  rpc DeleteWebsiteOtherIPAddress(DeleteWebsiteOtherIPAddressRequest) returns (CommonResult);
+
+}
+
+message CreateWebsiteOtherIPAddressRequest {
+  optional google.protobuf.BoolValue IsActived = 1;
+  optional google.protobuf.StringValue IpAddress = 2;
+  optional google.protobuf.StringValue IpReason = 3;
+}
+
+message UpdateWebsiteOtherIPAddressRequest {
+  optional google.protobuf.Int32Value Id = 1;
+  optional google.protobuf.BoolValue IsActived = 2;
+  optional google.protobuf.StringValue IpAddress = 3;
+  optional google.protobuf.StringValue IpReason = 4;
+}
+message DeleteWebsiteOtherIPAddressRequest {
+  optional google.protobuf.Int32Value Id = 1;
+}
+

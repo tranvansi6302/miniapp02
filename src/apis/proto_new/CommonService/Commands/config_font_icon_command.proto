@@ -1,0 +1,31 @@
+syntax = "proto3";
+import "result.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+package ConfigFontIcon;
+
+service ConfigFontIconCommand {
+  rpc CreateConfigFontIcon(CreateConfigFontIconRequest) returns (CommonResult);
+  rpc UpdateConfigFontIcon(UpdateConfigFontIconRequest) returns (CommonResult);
+  rpc DeleteConfigFontIcon(DeleteConfigFontIconRequest) returns (CommonResult);
+}
+
+message CreateConfigFontIconRequest {
+  google.protobuf.StringValue Id = 1;
+  google.protobuf.StringValue Description = 2;
+  google.protobuf.StringValue Type = 3;
+  google.protobuf.StringValue Version = 4;
+  google.protobuf.BoolValue IsActived = 5;
+}
+
+message UpdateConfigFontIconRequest {
+  google.protobuf.StringValue Id = 1;
+  optional google.protobuf.StringValue Description = 2;
+  optional google.protobuf.StringValue Type = 3;
+  optional google.protobuf.StringValue Version = 4;
+  optional google.protobuf.BoolValue IsActived = 5;
+}
+
+message DeleteConfigFontIconRequest {
+  google.protobuf.StringValue Id = 1;
+}

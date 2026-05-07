@@ -1,0 +1,52 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+import "common.proto";
+package PartnerServices;
+
+service PartnerServicesCommand {
+  rpc CreatePartnerServices(CreatePartnerServicesRequest) returns (CommonResult);
+  rpc UpdatePartnerServices(UpdatePartnerServicesRequest) returns (CommonResult);
+  rpc DeletePartnerServices(DeletePartnerServicesRequest) returns (CommonResult);
+  rpc CreatePartnerServicesMultiples(CreatePartnerServicesMultiplesRequest) returns (CommonResult);
+  rpc UpdatePartnerServicesMultiples(UpdatePartnerServicesMultiplesRequest) returns (CommonResult);
+  rpc AdminCreatePartnerServices(CreatePartnerServicesRequest) returns (CommonResult);
+  rpc AdminUpdatePartnerServices(AdminUpdatePartnerServicesRequest) returns (CommonResult);
+  rpc AdminDeletePartnerServices(DeletePartnerServicesRequest) returns (CommonResult);
+  rpc AdminApprovePartnerServices(AdminApprovePartnerServicesRequest) returns (CommonResult);
+}
+
+message CreatePartnerServicesRequest {
+      optional google.protobuf.Int32Value PartnerId = 1;
+      optional google.protobuf.Int32Value ServiceId = 2;
+      optional google.protobuf.StringValue PartnerServiceYearsExp = 3;
+      optional google.protobuf.Int32Value IsActived = 4;
+}
+message UpdatePartnerServicesRequest {
+      optional google.protobuf.Int32Value Id = 1;
+      optional google.protobuf.Int32Value PartnerId = 2;
+      optional google.protobuf.Int32Value ServiceId = 3;
+      optional google.protobuf.StringValue PartnerServiceYearsExp = 4;
+      optional google.protobuf.Int32Value IsActived = 5;
+}
+message AdminUpdatePartnerServicesRequest {
+      optional google.protobuf.Int32Value Id = 1;
+      optional google.protobuf.Int32Value PartnerId = 2;
+      optional google.protobuf.Int32Value ServiceId = 3;
+      optional google.protobuf.StringValue PartnerServiceYearsExp = 4;
+      optional google.protobuf.Int32Value IsActived = 5;
+      optional google.protobuf.Int32Value PartnerIsVerified = 6;
+}
+message DeletePartnerServicesRequest {
+      optional google.protobuf.Int32Value Id = 1;
+}
+
+message CreatePartnerServicesMultiplesRequest {
+      repeated CreatePartnerServicesRequest PartnerServices = 1;
+}
+message UpdatePartnerServicesMultiplesRequest {
+      repeated UpdatePartnerServicesRequest PartnerServices = 1;
+}
+message AdminApprovePartnerServicesRequest {
+      NullListInt32 Ids = 1;
+}

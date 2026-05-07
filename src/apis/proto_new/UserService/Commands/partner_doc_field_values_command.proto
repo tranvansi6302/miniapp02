@@ -1,0 +1,30 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+package PartnerDocFieldValues;
+
+service PartnerDocFieldValuesCommand {
+  rpc CreatePartnerDocFieldValues(CreatePartnerDocFieldValuesRequest) returns (CommonResult);
+  rpc UpdatePartnerDocFieldValues(UpdatePartnerDocFieldValuesRequest) returns (CommonResult);
+  rpc DeletePartnerDocFieldValues(DeletePartnerDocFieldValuesRequest) returns (CommonResult);
+  rpc AdminCreatePartnerDocFieldValues(CreatePartnerDocFieldValuesRequest) returns (CommonResult);
+  rpc AdminUpdatePartnerDocFieldValues(UpdatePartnerDocFieldValuesRequest) returns (CommonResult);
+  rpc AdminDeletePartnerDocFieldValues(DeletePartnerDocFieldValuesRequest) returns (CommonResult);
+}
+
+message CreatePartnerDocFieldValuesRequest {
+      optional google.protobuf.Int32Value PartnerDocId = 1;
+      optional google.protobuf.Int32Value FieldConfigId = 2;
+      optional google.protobuf.StringValue FieldValueText = 3;
+      optional google.protobuf.Int32Value IsActived = 4;
+}
+message UpdatePartnerDocFieldValuesRequest {
+      optional google.protobuf.Int32Value Id = 1;
+      optional google.protobuf.Int32Value PartnerDocId = 2;
+      optional google.protobuf.Int32Value FieldConfigId = 3;
+      optional google.protobuf.StringValue FieldValueText = 4;
+      optional google.protobuf.Int32Value IsActived = 5;
+}
+message DeletePartnerDocFieldValuesRequest {
+      optional google.protobuf.Int32Value Id = 1;
+}

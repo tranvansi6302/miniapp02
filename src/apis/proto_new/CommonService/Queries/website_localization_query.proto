@@ -1,0 +1,21 @@
+syntax = "proto3";
+import "result.proto";
+import "google/protobuf/wrappers.proto";
+package WebsiteLocalization;
+
+service WebsiteLocalizationQuery {
+	rpc GetAllWebsiteLocalizationsAcitved(GetAllWebsiteLocalizationsAcitvedRequest) returns (CommonResult);
+	rpc AdminGetAllWebsiteLocalizations(AdminGetAllWebsiteLocalizationsRequest) returns (CommonResult);
+	rpc GetDetailWebsiteLocalization(GetDetailWebsiteLocalizationRequest) returns (CommonResult);
+}
+
+message GetDetailWebsiteLocalizationRequest{
+	google.protobuf.StringValue Id = 1;
+}
+
+message GetAllWebsiteLocalizationsAcitvedRequest {
+}
+
+message AdminGetAllWebsiteLocalizationsRequest {
+	google.protobuf.BoolValue IsActived= 1;
+}

@@ -1,0 +1,3 @@
+- [x] Xác nhận phạm vi chỉnh sửa banner "Bạn cần dịch vụ ngay" ở HomeScreen
+- [x] Tăng border và tinh chỉnh gradient cho banner
+- [x] Rà soát lại thay đổi

@@ -1,0 +1,44 @@
+﻿syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+
+package PartnerUnitCatalog;
+
+service PartnerUnitCatalogCommand {
+  rpc CreatePartnerUnitCatalog(CreatePartnerUnitCatalogRequest) returns (CommonResult);
+  rpc UpdatePartnerUnitCatalog(UpdatePartnerUnitCatalogRequest) returns (CommonResult);
+  rpc DeletePartnerUnitCatalog(DeletePartnerUnitCatalogRequest) returns (CommonResult);
+  rpc AdminCreatePartnerUnitCatalog(AdminCreatePartnerUnitCatalogRequest) returns (CommonResult);
+  rpc AdminUpdatePartnerUnitCatalog(AdminUpdatePartnerUnitCatalogRequest) returns (CommonResult);
+  rpc AdminDeletePartnerUnitCatalog(DeletePartnerUnitCatalogRequest) returns (CommonResult);
+}
+
+// Request and Response Messages
+message CreatePartnerUnitCatalogRequest {
+	google.protobuf.StringValue UnitName = 1;
+	google.protobuf.BoolValue IsActived = 2;
+}
+
+message UpdatePartnerUnitCatalogRequest {
+    google.protobuf.Int32Value Id = 1;
+	google.protobuf.StringValue UnitName = 2;
+	google.protobuf.BoolValue IsActived = 3;
+}
+
+message DeletePartnerUnitCatalogRequest {
+    google.protobuf.Int32Value Id = 1;
+}
+
+message AdminCreatePartnerUnitCatalogRequest {
+	google.protobuf.StringValue UnitName = 1;
+	google.protobuf.Int32Value UnitCreatedDate = 2;
+	google.protobuf.BoolValue IsActived = 3;
+}
+
+message AdminUpdatePartnerUnitCatalogRequest {
+    google.protobuf.Int32Value Id = 1;
+	google.protobuf.StringValue UnitName = 2;
+	google.protobuf.Int32Value UnitCreatedDate = 3;
+	google.protobuf.BoolValue IsActived = 4;
+}

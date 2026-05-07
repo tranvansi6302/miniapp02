@@ -1,0 +1,67 @@
+﻿syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+package UserAuth;
+
+service UserAuthCommand{
+    rpc Login(LoginRequest) returns (CommonResult);
+    rpc Logout(LogoutRequest) returns (CommonResult);
+    rpc RefreshToken(RefreshTokenRequest) returns (CommonResult);
+    rpc Register(RegisterRequest) returns (CommonResult);
+		rpc ActivateAccount(ActivateAccountRequest) returns (CommonResult);
+		rpc ResetPassword(ResetPasswordRequest) returns (CommonResult);
+    rpc ReSendOTP(ReSendOTPRequest) returns (CommonResult);
+		rpc VerifyOTP(VerifyOTPRequest) returns (CommonResult);
+		rpc GetSession(GetSessionRequest) returns (CommonResult);
+}
+
+message LoginRequest{
+		google.protobuf.StringValue Tel = 1;
+		google.protobuf.StringValue Password = 2;
+}
+
+message LogoutRequest{
+}
+
+message RefreshTokenRequest {
+		optional google.protobuf.StringValue RefreshToken = 1;
+}
+
+message RegisterRequest{
+  	optional google.protobuf.StringValue Tel = 1;
+  	optional google.protobuf.StringValue Password = 2;
+  	optional google.protobuf.BoolValue Type = 3;
+  	optional google.protobuf.StringValue FirstName = 4;
+  	optional google.protobuf.StringValue LastName = 5;
+  	optional google.protobuf.StringValue Email = 6;
+  	optional google.protobuf.StringValue SendOTPMethod = 7; // Currently support: EMAIL. Future support: SMS
+  	optional google.protobuf.StringValue MailLanguage = 8; // Currently support: VN (default), EN
+}
+message ActivateAccountRequest{
+		optional google.protobuf.StringValue Tel = 1;
+		optional google.protobuf.StringValue OTP = 2;
+}
+
+message VerifyOTPRequest{
+		optional google.protobuf.StringValue Tel = 1;
+		optional google.protobuf.StringValue OTP = 2;
+}
+
+message ResetPasswordRequest{
+    optional google.protobuf.StringValue Tel = 1;
+		optional google.protobuf.StringValue Method = 2; // Currently support: EMAIL. Future support: SMS
+		optional google.protobuf.StringValue OTP = 3; // Need OTP send before to verify reset request is valid
+		optional google.protobuf.StringValue MailLanguage = 4; // Currently support: VN (default), EN
+}
+
+
+message ReSendOTPRequest{
+    optional google.protobuf.StringValue Tel = 1;
+		optional google.protobuf.StringValue Case = 2; // Use for chose appropriate mail content and subject for each case. Currently support: DEFAULT (default), ACTIVATE_ACCOUNT, RESET_PASSWORD
+		optional google.protobuf.StringValue Method = 3; // Currently support: EMAIL. Future support: SMS
+		optional google.protobuf.StringValue MailLanguage = 4; // Currently support: VN (default), EN
+		optional google.protobuf.StringValue Email = 5;
+}
+
+message GetSessionRequest{
+}

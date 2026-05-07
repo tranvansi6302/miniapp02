@@ -1,0 +1,30 @@
+﻿syntax = "proto3";
+import "result.proto";
+import "google/protobuf/wrappers.proto";
+package HelpdeskCatalog;
+
+service HelpdeskCatalogCommand {
+  rpc CreateHelpdeskCatalog(CreateHelpdeskCatalogRequest) returns (CommonResult);
+  rpc UpdateHelpdeskCatalog(UpdateHelpdeskCatalogRequest) returns (CommonResult);
+  rpc DeleteHelpdeskCatalog(DeleteHelpdeskCatalogRequest) returns (CommonResult);
+}
+
+message CreateHelpdeskCatalogRequest {
+  google.protobuf.StringValue KeyCatalog = 1;
+  google.protobuf.StringValue NameVn = 2;
+  google.protobuf.StringValue Url = 3;
+  google.protobuf.BoolValue IsActived = 4;
+  repeated string ContentDetailsMessages = 5;
+}
+
+message UpdateHelpdeskCatalogRequest {
+  google.protobuf.Int32Value Id = 1;
+  google.protobuf.StringValue KeyCatalog = 2;
+  google.protobuf.StringValue NameVn = 3;
+  google.protobuf.StringValue Url = 4;
+  google.protobuf.BoolValue IsActived = 5;
+}
+
+message DeleteHelpdeskCatalogRequest {
+  google.protobuf.Int32Value Id = 1;
+}

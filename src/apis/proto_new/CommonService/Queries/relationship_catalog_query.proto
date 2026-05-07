@@ -1,0 +1,28 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+import "common.proto";
+package RelationshipCatalog;
+
+service RelationshipCatalogQuery {
+  rpc GetAllRelationshipCatalogs(GetAllRelationshipCatalogsRequest) returns (CommonResult);
+  rpc GetDetailRelationshipCatalog(GetDetailRelationshipCatalogRequest) returns (CommonResult);
+  rpc AdminGetAllRelationshipCatalogs(AdminGetAllRelationshipCatalogsRequest) returns (CommonResult);
+}
+
+message GetAllRelationshipCatalogsRequest {
+      optional SkipTakeOption SkipTakeOption = 1;
+      optional PagingOption PagingOption = 2;
+      repeated OrderByOption OrderBy = 3;
+}
+
+message GetDetailRelationshipCatalogRequest {
+      optional google.protobuf.Int32Value Id = 1;
+}
+
+message AdminGetAllRelationshipCatalogsRequest {
+      optional SkipTakeOption SkipTakeOption = 1;
+      optional PagingOption PagingOption = 2;
+      repeated FilterOption Filter = 3;
+      repeated OrderByOption OrderBy = 4;
+}

@@ -1,0 +1,15 @@
+﻿syntax = "proto3";
+import "result.proto";
+import "google/protobuf/wrappers.proto";
+package WebsiteFileSetting;
+
+service WebsiteFileSettingQuery {
+    rpc GetDetailWebsiteFileSetting(GetDetailWebsiteFileSettingRequest) returns (CommonResult);
+    rpc GetAllWebsiteFileSettings(GetAllWebsiteFileSettingsRequest) returns (CommonResult);
+}
+
+message GetDetailWebsiteFileSettingRequest{
+  optional google.protobuf.StringValue Id = 1;
+}
+message GetAllWebsiteFileSettingsRequest {}
+

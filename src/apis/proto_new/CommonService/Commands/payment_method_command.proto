@@ -1,0 +1,29 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+package PaymentMethod;
+
+service PaymentMethodCommand {
+  rpc CreatePaymentMethod(CreatePaymentMethodRequest) returns (CommonResult);
+  rpc UpdatePaymentMethod(UpdatePaymentMethodRequest) returns (CommonResult);
+  rpc DeletePaymentMethod(DeletePaymentMethodRequest) returns (CommonResult);
+}
+
+message CreatePaymentMethodRequest {
+      optional google.protobuf.StringValue PaymentTitle = 1;
+      optional google.protobuf.StringValue PaymentDescription = 2;
+      optional google.protobuf.StringValue PaymentIcon = 3;
+      optional google.protobuf.Int32Value PaymentOrder = 4;
+      optional google.protobuf.BoolValue IsActived = 5;
+}
+message UpdatePaymentMethodRequest {
+      optional google.protobuf.Int32Value Id = 1;
+      optional google.protobuf.StringValue PaymentTitle = 2;
+      optional google.protobuf.StringValue PaymentDescription = 3;
+      optional google.protobuf.StringValue PaymentIcon = 4;
+      optional google.protobuf.Int32Value PaymentOrder = 5;
+      optional google.protobuf.BoolValue IsActived = 6;
+}
+message DeletePaymentMethodRequest {
+      optional google.protobuf.Int32Value Id = 1;
+}

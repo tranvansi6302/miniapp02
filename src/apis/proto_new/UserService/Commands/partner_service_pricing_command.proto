@@ -1,0 +1,111 @@
+﻿syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+import "common.proto";
+
+package PartnerServicePricing;
+
+service PartnerServicePricingCommand {
+  rpc CreatePartnerServicePricing(CreatePartnerServicePricingRequest) returns (CommonResult);
+  rpc UpdatePartnerServicePricing(UpdatePartnerServicePricingRequest) returns (CommonResult);
+  rpc DeletePartnerServicePricing(DeletePartnerServicePricingRequest) returns (CommonResult);
+  rpc CreatePartnerServicePricingMultiples(CreatePartnerServicePricingMultiplesRequest) returns (CommonResult);
+  rpc UpdatePartnerServicePricingMultiples(UpdatePartnerServicePricingMultiplesRequest) returns (CommonResult);
+  rpc AdminCreatePartnerServicePricing(AdminCreatePartnerServicePricingRequest) returns (CommonResult);
+  rpc AdminUpdatePartnerServicePricing(AdminUpdatePartnerServicePricingRequest) returns (CommonResult);
+  rpc AdminDeletePartnerServicePricing(DeletePartnerServicePricingRequest) returns (CommonResult);
+  rpc AdminApprovePartnerServicePricing(AdminApprovePartnerServicePricingRequest) returns (CommonResult);
+  rpc AdminRefusePartnerServicePricing(AdminRefusePartnerServicePricingRequest) returns (CommonResult);
+}
+
+// Request and Response Messages
+message CreatePartnerServicePricingRequest {
+	google.protobuf.Int32Value PartnerSerId = 1;
+	google.protobuf.StringValue SpCode = 2;
+	google.protobuf.StringValue SpName = 3;
+	google.protobuf.StringValue SpDescription = 4;
+	google.protobuf.Int32Value SpPricingApplyDate = 5;
+	google.protobuf.DoubleValue SpPriceTotal = 6;
+	google.protobuf.Int32Value SpUnitId = 7;
+	google.protobuf.Int32Value IsActived = 8;
+}
+
+message UpdatePartnerServicePricingRequest {
+    google.protobuf.Int32Value Id = 1;
+	google.protobuf.Int32Value PartnerSerId = 2;
+	google.protobuf.StringValue SpCode = 3;
+	google.protobuf.StringValue SpName = 4;
+	google.protobuf.StringValue SpDescription = 5;
+	google.protobuf.Int32Value SpPricingApplyDate = 6;
+	google.protobuf.DoubleValue SpPriceTotal = 7;
+	google.protobuf.Int32Value SpUnitId = 8;
+	google.protobuf.Int32Value IsActived = 9;
+}
+
+message DeletePartnerServicePricingRequest {
+    google.protobuf.Int32Value Id = 1;
+}
+
+
+message CreatePartnerServicePricingMultiplesRequest {
+	repeated CreatePartnerServicePricingRequest PartnerServicePricings = 1;
+}
+
+message UpdatePartnerServicePricingMultiplesRequest {
+   repeated UpdatePartnerServicePricingRequest PartnerServicePricings = 1;
+}
+
+message AdminCreatePartnerServicePricingRequest {
+	google.protobuf.Int32Value PartnerSerId = 1;
+	google.protobuf.StringValue SpCode = 2;
+	google.protobuf.StringValue SpName = 3;
+	google.protobuf.StringValue SpDescription = 4;
+	google.protobuf.Int32Value SpPricingApplyDate = 5;
+	google.protobuf.Int32Value SpCreatedDate = 6;
+	google.protobuf.StringValue SpIpaddress = 7;
+	google.protobuf.StringValue SpBrowser = 8;
+	google.protobuf.BoolValue SpType = 9;
+	google.protobuf.DoubleValue SpPriceTotal = 10;
+	google.protobuf.Int32Value SpUnitId = 11;
+	google.protobuf.Int32Value SpRejectedDate = 12;
+	google.protobuf.Int32Value SpRejectedBy = 13;
+	google.protobuf.StringValue SpRejectedReason = 14;
+	google.protobuf.Int32Value SpStatus = 15;
+	google.protobuf.Int32Value IsActived = 16;
+}
+
+message AdminUpdatePartnerServicePricingRequest {
+    google.protobuf.Int32Value Id = 1;
+	google.protobuf.Int32Value PartnerSerId = 2;
+	google.protobuf.StringValue SpCode = 3;
+	google.protobuf.StringValue SpName = 4;
+	google.protobuf.StringValue SpDescription = 5;
+	google.protobuf.Int32Value SpPricingApplyDate = 6;
+	google.protobuf.Int32Value SpCreatedDate = 7;
+	google.protobuf.StringValue SpIpaddress = 8;
+	google.protobuf.StringValue SpBrowser = 9;
+	google.protobuf.BoolValue SpType = 10;
+	google.protobuf.DoubleValue SpPriceTotal = 11;
+	google.protobuf.Int32Value SpUnitId = 12;
+	google.protobuf.Int32Value SpRejectedDate = 13;
+	google.protobuf.Int32Value SpRejectedBy = 14;
+	google.protobuf.StringValue SpRejectedReason = 15;
+	google.protobuf.Int32Value SpStatus = 16;
+	google.protobuf.Int32Value IsActived = 17;
+}
+
+message AdminApprovePartnerServicePricingRequest {
+    google.protobuf.Int32Value PartnerId = 1;
+    NullListInt32 PartnerServicePricingIds = 2;
+}
+
+
+message AdminRefusePartnerServicePricingRequest {
+    repeated RefusePartnerServicePricingRequest RefusePartnerServicePricings = 1;
+}
+
+message RefusePartnerServicePricingRequest {
+    google.protobuf.Int32Value PartnerServicePricingId = 1;
+    google.protobuf.StringValue SpRejectedReason = 2;
+}

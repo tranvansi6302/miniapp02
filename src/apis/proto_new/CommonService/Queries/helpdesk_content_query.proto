@@ -1,0 +1,16 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+import "common.proto";
+package HelpdeskContent;
+
+service HelpdeskContentQuery {
+  rpc GetAllHelpdeskContents(GetAllHelpdeskContentsRequest) returns (CommonResult);
+  rpc GetDetailHelpdeskContent(GetDetailHelpdeskContentRequest) returns (CommonResult);
+}
+
+message GetAllHelpdeskContentsRequest {
+}
+message GetDetailHelpdeskContentRequest {
+      optional google.protobuf.Int32Value Id = 1;
+}

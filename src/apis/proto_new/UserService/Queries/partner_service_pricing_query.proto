@@ -1,0 +1,30 @@
+﻿syntax = "proto3";
+import "result.proto";
+import "common.proto";
+import "google/protobuf/wrappers.proto";
+package PartnerServicePricing;
+
+service PartnerServicePricingQuery {
+    rpc GetDetailPartnerServicePricing(GetDetailPartnerServicePricingRequest) returns (CommonResult);
+    rpc GetAllPartnerServicePricings(GetAllPartnerServicePricingsRequest) returns (CommonResult);
+    rpc GetAveragePriceApplied(GetAveragePriceAppliedRequest) returns (CommonResult);
+    rpc AdminGetDetailPartnerServicePricing(GetDetailPartnerServicePricingRequest) returns (CommonResult);
+    rpc AdminGetAllPartnerServicePricings(GetAllPartnerServicePricingsRequest) returns (CommonResult);
+}
+
+message GetDetailPartnerServicePricingRequest{
+    optional google.protobuf.Int32Value Id = 1;
+}
+message GetAllPartnerServicePricingsRequest {
+    optional SkipTakeOption SkipTakeOption = 1;
+    optional PagingOption PagingOption = 2;
+    repeated FilterOption Filter = 3;
+    repeated OrderByOption OrderBy = 4;
+    optional string SearchValue = 5;
+    repeated string SearchFields = 6;
+    optional google.protobuf.Int32Value FilterPartnerId = 7;
+}
+
+message GetAveragePriceAppliedRequest{
+    NullListInt32 ServiceIds = 1;
+}

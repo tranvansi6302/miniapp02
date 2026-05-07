@@ -1,0 +1,27 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+package BankCatalog;
+
+service BankCatalogCommand {
+  rpc CreateBankCatalog(CreateBankCatalogRequest) returns (CommonResult);
+  rpc UpdateBankCatalog(UpdateBankCatalogRequest) returns (CommonResult);
+  rpc DeleteBankCatalog(DeleteBankCatalogRequest) returns (CommonResult);
+}
+
+message CreateBankCatalogRequest {
+      optional google.protobuf.StringValue BankCode = 1;
+      optional google.protobuf.StringValue BankName = 2;
+      optional google.protobuf.StringValue BankIcon = 3;
+      optional google.protobuf.Int32Value IsActived = 4;
+}
+message UpdateBankCatalogRequest {
+      optional google.protobuf.Int32Value Id = 1;
+      optional google.protobuf.StringValue BankCode = 2;
+      optional google.protobuf.StringValue BankName = 3;
+      optional google.protobuf.StringValue BankIcon = 4;
+      optional google.protobuf.Int32Value IsActived = 5;
+}
+message DeleteBankCatalogRequest {
+      optional google.protobuf.Int32Value Id = 1;
+}

@@ -1,0 +1,27 @@
+﻿syntax = "proto3";
+import "result.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+package HelpdeskContent;
+
+service HelpdeskContentCommand {
+  rpc CreateHelpdeskContent(CreateHelpdeskContentRequest) returns (CommonResult);
+  rpc UpdateHelpdeskContent(UpdateHelpdeskContentRequest) returns (CommonResult);
+  rpc DeleteHelpdeskContent(DeleteHelpdeskContentRequest) returns (CommonResult);
+}
+
+message CreateHelpdeskContentRequest {
+  google.protobuf.StringValue ContentDetail = 1;
+  google.protobuf.Int32Value CatalogId = 2;
+}
+
+message UpdateHelpdeskContentRequest {
+  google.protobuf.Int32Value Id = 1;
+  google.protobuf.StringValue ContentDetail = 2;
+  google.protobuf.Int32Value CatalogId = 3;
+}
+
+message DeleteHelpdeskContentRequest {
+  google.protobuf.Int32Value Id = 1;
+  google.protobuf.Int32Value CatalogId = 2;
+}

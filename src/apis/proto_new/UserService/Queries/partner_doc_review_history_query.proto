@@ -1,0 +1,22 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+import "common.proto";
+package PartnerDocReviewHistory;
+
+service PartnerDocReviewHistoryQuery {
+  rpc GetAllPartnerDocReviewHistories(GetAllPartnerDocReviewHistoriesRequest) returns (CommonResult);
+  rpc GetDetailPartnerDocReviewHistory(GetDetailPartnerDocReviewHistoryRequest) returns (CommonResult);
+  rpc AdminGetAllPartnerDocReviewHistories(GetAllPartnerDocReviewHistoriesRequest) returns (CommonResult);
+  rpc AdminGetDetailPartnerDocReviewHistory(GetDetailPartnerDocReviewHistoryRequest) returns (CommonResult);
+}
+
+message GetAllPartnerDocReviewHistoriesRequest {
+      optional SkipTakeOption SkipTakeOption = 1;
+      optional PagingOption PagingOption = 2;
+      repeated FilterOption Filter = 3;
+      repeated OrderByOption OrderBy = 4;
+}
+message GetDetailPartnerDocReviewHistoryRequest {
+      optional google.protobuf.Int32Value Id = 1;
+}

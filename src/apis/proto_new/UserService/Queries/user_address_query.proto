@@ -1,0 +1,22 @@
+﻿syntax = "proto3";
+import "result.proto";
+import "common.proto";
+import "google/protobuf/wrappers.proto";
+package UserAddress;
+
+service UserAddressQuery {
+    rpc GetDetailUserAddress(GetDetailUserAddressRequest) returns (CommonResult);
+    rpc GetAllUserAddresses(GetAllUserAddressesRequest) returns (CommonResult);
+}
+
+message GetDetailUserAddressRequest{
+    optional google.protobuf.Int32Value Id = 1;
+}
+message GetAllUserAddressesRequest {
+    optional SkipTakeOption SkipTakeOption = 1;
+    optional PagingOption PagingOption = 2;
+    repeated FilterOption Filter = 3;
+    repeated OrderByOption OrderBy = 4;
+    optional string SearchValue = 5;
+    repeated string SearchFields = 6;
+}

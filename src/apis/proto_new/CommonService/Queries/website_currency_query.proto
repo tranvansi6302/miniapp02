@@ -1,0 +1,21 @@
+﻿syntax = "proto3";
+import "result.proto";
+import "google/protobuf/wrappers.proto";
+package WebsiteWebsiteCurrency;
+
+service WebsiteWebsiteCurrencyQuery {
+    rpc GetAllWebsiteCurrenciesActived(GetAllWebsiteCurrenciesActivedRequest) returns (CommonResult);
+    rpc AdminGetAllWebsiteCurrencies(AdminGetAllWebsiteCurrenciesRequest) returns (CommonResult);
+    rpc GetDetailWebsiteCurrency(GetDetailWebsiteCurrencyRequest) returns (CommonResult);
+}
+
+message GetDetailWebsiteCurrencyRequest{
+    optional google.protobuf.StringValue Id = 1;
+}
+
+message GetAllWebsiteCurrenciesActivedRequest {}
+
+message AdminGetAllWebsiteCurrenciesRequest {
+    optional google.protobuf.BoolValue IsActived= 1;
+}
+

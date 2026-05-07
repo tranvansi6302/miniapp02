@@ -1,0 +1,27 @@
+syntax = "proto3";
+import "result.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+package WebsiteLanguage;
+
+service WebsiteLanguageCommand {
+  rpc CreateWebsiteLanguage(CreateWebsiteLanguageRequest) returns (CommonResult);
+  rpc UpdateWebsiteLanguage(UpdateWebsiteLanguageRequest) returns (CommonResult);
+  rpc DeleteWebsiteLanguage(DeleteWebsiteLanguageRequest) returns (CommonResult);
+}
+
+message CreateWebsiteLanguageRequest {
+  google.protobuf.StringValue Id = 1;
+  google.protobuf.StringValue Language = 2;
+  google.protobuf.BoolValue IsActived = 3;
+}
+
+message UpdateWebsiteLanguageRequest {
+  google.protobuf.StringValue Id = 1;
+  optional google.protobuf.StringValue Language = 2;
+  optional google.protobuf.BoolValue IsActived = 3;
+}
+
+message DeleteWebsiteLanguageRequest {
+  google.protobuf.StringValue Id = 1;
+}

@@ -1,0 +1,21 @@
+syntax = "proto3";
+import "result.proto";
+import "google/protobuf/wrappers.proto";
+package ConfigLang;
+
+service ConfigLangQuery {
+  rpc GetAllConfigLangsActived(GetAllConfigLangsActivedRequest) returns (CommonResult);
+  rpc AdminGetAllConfigLangs(AdminGetAllConfigLangsRequest) returns (CommonResult);
+  rpc GetDetailConfigLang(GetDetailConfigLangRequest) returns (CommonResult);
+}
+
+message GetDetailConfigLangRequest {
+ optional google.protobuf.StringValue Id = 1;
+}
+
+message GetAllConfigLangsActivedRequest {
+}
+
+message AdminGetAllConfigLangsRequest {
+  //optional bool IsActived = 1;
+}

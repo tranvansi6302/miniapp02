@@ -1,0 +1,22 @@
+﻿syntax = "proto3";
+import "result.proto";
+import "common.proto";
+import "google/protobuf/wrappers.proto";
+package UserPaymentMethod;
+
+service UserPaymentMethodQuery {
+    rpc GetDetailUserPaymentMethod(GetDetailUserPaymentMethodRequest) returns (CommonResult);
+    rpc GetAllUserPaymentMethods(GetAllUserPaymentMethodsRequest) returns (CommonResult);
+}
+
+message GetDetailUserPaymentMethodRequest{
+    optional google.protobuf.Int32Value Id = 1;
+}
+message GetAllUserPaymentMethodsRequest {
+    optional SkipTakeOption SkipTakeOption = 1;
+    optional PagingOption PagingOption = 2;
+    repeated FilterOption Filter = 3;
+    repeated OrderByOption OrderBy = 4;
+    optional string SearchValue = 5;
+    repeated string SearchFields = 6;
+}

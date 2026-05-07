@@ -1,0 +1,34 @@
+﻿syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+
+package UserPaymentMethod;
+
+service UserPaymentMethodCommand {
+  rpc CreateUserPaymentMethod(CreateUserPaymentMethodRequest) returns (CommonResult);
+  rpc UpdateUserPaymentMethod(UpdateUserPaymentMethodRequest) returns (CommonResult);
+  rpc DeleteUserPaymentMethod(DeleteUserPaymentMethodRequest) returns (CommonResult);
+}
+
+// Request and Response Messages
+message CreateUserPaymentMethodRequest {
+	google.protobuf.StringValue PayName = 1;
+	google.protobuf.StringValue PayNumber = 2;
+	google.protobuf.Int32Value UserId = 3;
+	google.protobuf.Int32Value BankId = 4;
+	google.protobuf.Int32Value IsActived = 5;
+}
+
+message UpdateUserPaymentMethodRequest {
+    google.protobuf.Int32Value Id = 1;
+	google.protobuf.StringValue PayName = 2;
+	google.protobuf.StringValue PayNumber = 3;
+	google.protobuf.Int32Value UserId = 4;
+	google.protobuf.Int32Value BankId = 5;
+	google.protobuf.Int32Value IsActived = 6;
+}
+
+message DeleteUserPaymentMethodRequest {
+    google.protobuf.Int32Value Id = 1;
+}

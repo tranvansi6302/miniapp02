@@ -1,0 +1,21 @@
+﻿syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+package WebsiteLocalization;
+
+service WebsiteLocalizationCommand {
+	rpc CreateWebsiteLocalization(CreateWebsiteLocalizationRequest) returns (CommonResult);
+	rpc UpdateWebsiteLocalization(UpdateWebsiteLocalizationRequest) returns (CommonResult);
+}
+
+message CreateWebsiteLocalizationRequest{
+	google.protobuf.StringValue Id = 1;
+    google.protobuf.StringValue Localization = 2;
+    google.protobuf.BoolValue IsActived = 3;
+}
+message UpdateWebsiteLocalizationRequest{
+	google.protobuf.StringValue Id = 1;
+    google.protobuf.StringValue Localization = 2;
+    google.protobuf.BoolValue IsActived = 3;
+}

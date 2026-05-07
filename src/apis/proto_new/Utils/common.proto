@@ -1,0 +1,37 @@
+﻿syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+
+message SkipTakeOption {
+	google.protobuf.Int32Value Skip = 1;
+	google.protobuf.Int32Value Take = 2;
+}
+
+message PagingOption {
+	google.protobuf.Int32Value PageNumber = 1;
+	google.protobuf.Int32Value PageSize = 2;
+}
+
+message NullListInt32 {
+    repeated int32 Value = 1;
+}
+
+message OrderByOption {
+    string Field = 1;
+	bool IsDescending = 2;
+}
+
+message NullListString {
+	repeated string Value = 1;
+}
+
+message FilterOption {
+    string Field = 1;
+    string  Operator = 2;
+	repeated string  Values = 3;
+}
+
+message DateFilter {
+	optional google.protobuf.Int32Value Year = 1;
+	optional google.protobuf.Int32Value Month = 2;
+	optional google.protobuf.Int32Value Day = 3;
+}

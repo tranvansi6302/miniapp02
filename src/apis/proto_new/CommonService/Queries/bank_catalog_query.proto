@@ -1,0 +1,26 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+import "common.proto";
+package BankCatalog;
+
+service BankCatalogQuery {
+  rpc GetAllBankCatalogs(GetAllBankCatalogsRequest) returns (CommonResult);
+  rpc GetDetailBankCatalog(GetDetailBankCatalogRequest) returns (CommonResult);
+  rpc AdminGetAllBankCatalogs(AdminGetAllBankCatalogsRequest) returns (CommonResult);
+}
+
+message GetAllBankCatalogsRequest {
+      optional SkipTakeOption SkipTakeOption = 1;
+      optional PagingOption PagingOption = 2;
+      repeated OrderByOption OrderBy = 3;
+}
+message GetDetailBankCatalogRequest {
+      optional google.protobuf.Int32Value Id = 1;
+}
+message AdminGetAllBankCatalogsRequest {
+      optional SkipTakeOption SkipTakeOption = 1;
+      optional PagingOption PagingOption = 2;
+      repeated FilterOption Filter = 3;
+      repeated OrderByOption OrderBy = 4;
+}

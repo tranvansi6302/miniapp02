@@ -1,0 +1,27 @@
+﻿syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "result.proto";  
+package ShareSocialNetwork;
+
+service ShareSocialNetworkCommand {
+  rpc CreateShareSocialNetwork(CreateShareSocialNetworkRequest) returns (CommonResult);
+  rpc UpdateShareSocialNetwork(UpdateShareSocialNetworkRequest) returns (CommonResult);
+  rpc DeleteShareSocialNetwork(DeleteShareSocialNetworkRequest) returns (CommonResult);
+}
+
+message CreateShareSocialNetworkRequest {
+  optional google.protobuf.StringValue Id = 1;
+  optional google.protobuf.StringValue Url = 2;
+  optional google.protobuf.StringValue Icon = 3;
+
+}
+
+message UpdateShareSocialNetworkRequest {
+  optional google.protobuf.StringValue Id = 1;
+  optional google.protobuf.StringValue Url = 2;
+  optional google.protobuf.StringValue Icon = 3;
+}
+message DeleteShareSocialNetworkRequest {
+  optional google.protobuf.StringValue Id = 1;
+}

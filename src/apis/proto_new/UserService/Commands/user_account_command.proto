@@ -1,0 +1,57 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+package UserAccount;
+
+service UserAccountCommand{
+    rpc ChangePassword(ChangePasswordRequest) returns (CommonResult);
+    rpc DeleteUserAccount(DeleteUserAccountRequest) returns (CommonResult);
+    rpc UpdateUserInformation(UpdateUserInformationRequest) returns (CommonResult);
+	rpc UpdateEmail(UpdateEmailRequest) returns (CommonResult);
+    rpc AdminCreateUserAccount(AdminCreateUserAccountRequest) returns (CommonResult);
+    rpc AdminUpdateUserAccount(AdminUpdateUserAccountRequest) returns (CommonResult);
+    rpc AdminDeleteUserAccount(DeleteUserAccountRequest) returns (CommonResult);
+}
+
+message ChangePasswordRequest {
+    optional google.protobuf.Int32Value Id = 1;
+    optional google.protobuf.StringValue OldPassword = 2;
+    optional google.protobuf.StringValue NewPassword = 3;
+}
+message UpdateEmailRequest {
+    optional google.protobuf.Int32Value Id = 1;
+    optional google.protobuf.StringValue Email = 2;
+    optional google.protobuf.StringValue OTP = 3;
+}
+message DeleteUserAccountRequest {
+    optional google.protobuf.Int32Value Id = 1;
+}
+
+message UpdateUserInformationRequest {
+    optional google.protobuf.Int32Value Id = 1;
+    optional google.protobuf.StringValue NumCustomer = 2;
+    optional google.protobuf.StringValue FirstName = 3;
+    optional google.protobuf.StringValue LastName = 4;
+    optional google.protobuf.Int32Value Gender = 5;
+    optional google.protobuf.Int32Value DateOfBirth = 6;
+    optional google.protobuf.StringValue Img = 7;
+    optional google.protobuf.StringValue IdCard = 8;
+    optional google.protobuf.StringValue Address = 9;
+    optional google.protobuf.Int32Value WardId = 10;
+}
+// Admin
+message AdminCreateUserAccountRequest {
+  optional google.protobuf.StringValue UserTel = 1;
+  optional google.protobuf.StringValue UserPassword = 2;
+  optional google.protobuf.StringValue UserOtp = 3;
+  optional google.protobuf.Int32Value IsActived = 4;
+  
+}
+
+message AdminUpdateUserAccountRequest {
+  optional google.protobuf.Int32Value Id = 1;
+  optional google.protobuf.StringValue UserTel = 2;
+  optional google.protobuf.StringValue UserPassword = 3;
+  optional google.protobuf.StringValue UserOtp = 4;
+  optional google.protobuf.Int32Value IsActived = 5;
+}

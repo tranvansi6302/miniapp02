@@ -1,0 +1,23 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+package RelationshipCatalog;
+
+service RelationshipCatalogCommand {
+  rpc CreateRelationshipCatalog(CreateRelationshipCatalogRequest) returns (CommonResult);
+  rpc UpdateRelationshipCatalog(UpdateRelationshipCatalogRequest) returns (CommonResult);
+  rpc DeleteRelationshipCatalog(DeleteRelationshipCatalogRequest) returns (CommonResult);
+}
+
+message CreateRelationshipCatalogRequest {
+      optional google.protobuf.StringValue RlpName = 1;
+      optional google.protobuf.BoolValue IsActived = 2;
+}
+message UpdateRelationshipCatalogRequest {
+      optional google.protobuf.Int32Value Id = 1;
+      optional google.protobuf.StringValue RlpName = 2;
+      optional google.protobuf.BoolValue IsActived = 3;
+}
+message DeleteRelationshipCatalogRequest {
+      optional google.protobuf.Int32Value Id = 1;
+}

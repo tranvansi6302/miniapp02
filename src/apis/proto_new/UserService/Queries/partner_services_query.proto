@@ -1,0 +1,22 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+import "common.proto";
+package PartnerServices;
+
+service PartnerServicesQuery {
+  rpc GetAllPartnerServices(GetAllPartnerServicesRequest) returns (CommonResult);
+  rpc GetDetailPartnerServices(GetDetailPartnerServicesRequest) returns (CommonResult);
+  rpc AdminGetAllPartnerServices(GetAllPartnerServicesRequest) returns (CommonResult);
+  rpc AdminGetDetailPartnerServices(GetDetailPartnerServicesRequest) returns (CommonResult);
+}
+
+message GetAllPartnerServicesRequest {
+      optional SkipTakeOption SkipTakeOption = 1;
+      optional PagingOption PagingOption = 2;
+      repeated FilterOption Filter = 3;
+      repeated OrderByOption OrderBy = 4;
+}
+message GetDetailPartnerServicesRequest {
+      optional google.protobuf.Int32Value Id = 1;
+}

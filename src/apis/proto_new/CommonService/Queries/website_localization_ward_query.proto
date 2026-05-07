@@ -1,0 +1,20 @@
+﻿syntax = "proto3";
+import "result.proto";
+import "common.proto";
+import "google/protobuf/wrappers.proto";
+package WebsiteLocalizationWard;
+
+service WebsiteLocalizationWardQuery {
+    rpc GetDetailWebsiteLocalizationWard(GetDetailWebsiteLocalizationWardRequest) returns (CommonResult);
+    rpc GetAllWebsiteLocalizationWards(GetAllWebsiteLocalizationWardsRequest) returns (CommonResult);
+}
+
+message GetDetailWebsiteLocalizationWardRequest{
+    optional google.protobuf.Int32Value Id = 1;
+}
+message GetAllWebsiteLocalizationWardsRequest {
+  optional SkipTakeOption SkipTakeOption = 1;
+  optional PagingOption PagingOption = 2;
+  repeated OrderByOption OrderBy = 3;
+  optional google.protobuf.Int32Value WardPid = 4;
+}

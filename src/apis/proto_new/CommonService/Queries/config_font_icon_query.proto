@@ -1,0 +1,21 @@
+syntax = "proto3";
+import "result.proto";
+import "google/protobuf/wrappers.proto";
+package ConfigFontIcon;
+
+service ConfigFontIconQuery {
+  rpc GetAllConfigFontIconsActived(GetAllConfigFontIconsActivedRequest) returns (CommonResult);
+  rpc AdminGetAllConfigFontIcons(AdminGetAllConfigFontIconsRequest) returns (CommonResult);
+  rpc GetDetailConfigFontIcon(GetDetailConfigFontIconRequest) returns (CommonResult);
+}
+
+message GetDetailConfigFontIconRequest {
+  optional google.protobuf.StringValue Id = 1;
+}
+
+message GetAllConfigFontIconsActivedRequest {
+}
+
+message AdminGetAllConfigFontIconsRequest {
+  optional google.protobuf.BoolValue IsActived = 1;
+}

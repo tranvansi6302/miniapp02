@@ -1,0 +1,36 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+package PartnerDocFieldConfigs;
+
+service PartnerDocFieldConfigsCommand {
+  rpc CreatePartnerDocFieldConfigs(CreatePartnerDocFieldConfigsRequest) returns (CommonResult);
+  rpc UpdatePartnerDocFieldConfigs(UpdatePartnerDocFieldConfigsRequest) returns (CommonResult);
+  rpc DeletePartnerDocFieldConfigs(DeletePartnerDocFieldConfigsRequest) returns (CommonResult);
+  rpc AdminCreatePartnerDocFieldConfigs(CreatePartnerDocFieldConfigsRequest) returns (CommonResult);
+  rpc AdminUpdatePartnerDocFieldConfigs(UpdatePartnerDocFieldConfigsRequest) returns (CommonResult);
+  rpc AdminDeletePartnerDocFieldConfigs(DeletePartnerDocFieldConfigsRequest) returns (CommonResult);
+}
+
+message CreatePartnerDocFieldConfigsRequest {
+      optional google.protobuf.Int32Value PartnerTypeId = 1;
+      optional google.protobuf.StringValue FieldName = 2;
+      optional google.protobuf.StringValue FieldType = 3;
+      optional google.protobuf.Int32Value FieldDisplayOrder = 4;
+      optional google.protobuf.Int32Value FieldIsRequired = 5;
+      optional google.protobuf.Int32Value IsActived = 6;
+      optional google.protobuf.Int32Value FieldTypeMax = 7;
+}
+message UpdatePartnerDocFieldConfigsRequest {
+      optional google.protobuf.Int32Value Id = 1;
+      optional google.protobuf.Int32Value PartnerTypeId = 2;
+      optional google.protobuf.StringValue FieldName = 3;
+      optional google.protobuf.StringValue FieldType = 4;
+      optional google.protobuf.Int32Value FieldDisplayOrder = 5;
+      optional google.protobuf.Int32Value FieldIsRequired = 6;
+      optional google.protobuf.Int32Value IsActived = 7;
+      optional google.protobuf.Int32Value FieldTypeMax = 8;
+}
+message DeletePartnerDocFieldConfigsRequest {
+      optional google.protobuf.Int32Value Id = 1;
+}

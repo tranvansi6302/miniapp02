@@ -1,0 +1,33 @@
+﻿syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+import "common.proto";
+package UserAccount;
+
+service UserAccountQuery{
+	rpc GetDetailUserAccount(GetDetailUserAccountRequest) returns (CommonResult);
+	rpc GetUserLoginHistories(GetUserLoginHistoriesRequest) returns (CommonResult);
+    rpc AdminGetAllUserAccounts(AdminGetAllUserAccountsRequest) returns (CommonResult);
+    rpc AdminGetDetailUserAccount(AdminGetDetailUserAccountRequest) returns (CommonResult);
+}
+message GetDetailUserAccountRequest {
+	optional google.protobuf.Int32Value Id = 1;
+	optional google.protobuf.StringValue Tel = 2;
+}
+
+message GetUserLoginHistoriesRequest {
+	optional SkipTakeOption SkipTakeOption = 1;
+	optional PagingOption PagingOption = 2;
+	optional DateFilter DateFilter = 3;
+}
+message AdminGetAllUserAccountsRequest {
+  optional SkipTakeOption SkipTakeOption = 1;
+  optional PagingOption PagingOption = 2;
+  repeated FilterOption Filter = 3;
+  repeated OrderByOption OrderBy = 4;
+  optional string SearchValue = 5;
+  repeated string SearchFields = 6;
+}
+message AdminGetDetailUserAccountRequest {
+  optional google.protobuf.Int32Value Id = 1;
+}

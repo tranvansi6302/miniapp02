@@ -1,0 +1,27 @@
+﻿syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "result.proto";  
+package WebsiteFileSetting;
+
+service WebsiteFileSettingCommand {
+  rpc CreateWebsiteFileSetting(CreateWebsiteFileSettingRequest) returns (CommonResult);
+  rpc UpdateWebsiteFileSetting(UpdateWebsiteFileSettingRequest) returns (CommonResult);
+  rpc DeleteWebsiteFileSetting(DeleteWebsiteFileSettingRequest) returns (CommonResult);
+}
+
+message CreateWebsiteFileSettingRequest {
+  optional google.protobuf.StringValue Id = 1;
+  optional google.protobuf.StringValue FileAllowed = 2;
+  optional google.protobuf.Int32Value FileSizeMax = 3;
+}
+
+message UpdateWebsiteFileSettingRequest {
+  optional google.protobuf.StringValue Id = 1;
+  optional google.protobuf.StringValue FileAllowed = 2;
+  optional google.protobuf.Int32Value FileSizeMax = 3;
+}
+
+message DeleteWebsiteFileSettingRequest {
+  optional google.protobuf.StringValue Id = 1;
+}

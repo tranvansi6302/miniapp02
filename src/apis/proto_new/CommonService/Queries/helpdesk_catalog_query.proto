@@ -1,0 +1,18 @@
+syntax = "proto3";
+import "result.proto";
+import "google/protobuf/wrappers.proto";
+package HelpdeskCatalog;
+
+service HelpdeskCatalogQuery {
+	rpc GetAllHelpdeskCatalogsActived(GetAllHelpdeskCatalogsActivedRequest) returns (CommonResult);
+    rpc AdminGetAllHelpdeskCatalogs(AdminGetAllHelpdeskCatalogsRequest) returns (CommonResult);
+    rpc GetDetailHelpdeskCatalog(GetDetailHelpdeskCatalogRequest) returns (CommonResult);
+}
+
+message GetDetailHelpdeskCatalogRequest {
+    google.protobuf.Int32Value Id = 1;
+}
+
+message GetAllHelpdeskCatalogsActivedRequest{}
+
+message AdminGetAllHelpdeskCatalogsRequest {}

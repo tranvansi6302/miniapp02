@@ -1,0 +1,27 @@
+syntax = "proto3";
+import "result.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+package ConfigIcon;
+
+service ConfigIconCommand {
+  rpc CreateConfigIcon(CreateConfigIconRequest) returns (CommonResult);
+  rpc UpdateConfigIcon(UpdateConfigIconRequest) returns (CommonResult);
+  rpc DeleteConfigIcon(DeleteConfigIconRequest) returns (CommonResult);
+}
+
+message CreateConfigIconRequest {
+  google.protobuf.StringValue Id = 1;
+  google.protobuf.StringValue Description = 2;
+  google.protobuf.StringValue Url = 3;
+}
+
+message UpdateConfigIconRequest {
+  google.protobuf.StringValue Id = 1;
+  google.protobuf.StringValue Description = 2;
+  google.protobuf.StringValue Url = 3;
+}
+
+message DeleteConfigIconRequest {
+  google.protobuf.StringValue Id = 1;
+}

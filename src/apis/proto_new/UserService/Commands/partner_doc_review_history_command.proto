@@ -1,0 +1,34 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+package PartnerDocReviewHistory;
+
+service PartnerDocReviewHistoryCommand {
+  rpc CreatePartnerDocReviewHistory(CreatePartnerDocReviewHistoryRequest) returns (CommonResult);
+  rpc UpdatePartnerDocReviewHistory(UpdatePartnerDocReviewHistoryRequest) returns (CommonResult);
+  rpc DeletePartnerDocReviewHistory(DeletePartnerDocReviewHistoryRequest) returns (CommonResult);
+  rpc AdminCreatePartnerDocReviewHistory(CreatePartnerDocReviewHistoryRequest) returns (CommonResult);
+  rpc AdminUpdatePartnerDocReviewHistory(UpdatePartnerDocReviewHistoryRequest) returns (CommonResult);
+  rpc AdminDeletePartnerDocReviewHistory(DeletePartnerDocReviewHistoryRequest) returns (CommonResult);
+}
+
+message CreatePartnerDocReviewHistoryRequest {
+      optional google.protobuf.Int32Value PartnerDocId = 1;
+      optional google.protobuf.Int32Value UserId = 2;
+      optional google.protobuf.StringValue PartnerHisAction = 3;
+      optional google.protobuf.StringValue PartnerHisReason = 4;
+      optional google.protobuf.Int32Value PartnerHisDatetime = 5;
+      optional google.protobuf.Int32Value IsActived = 6;
+}
+message UpdatePartnerDocReviewHistoryRequest {
+      optional google.protobuf.Int32Value Id = 1;
+      optional google.protobuf.Int32Value PartnerDocId = 2;
+      optional google.protobuf.Int32Value UserId = 3;
+      optional google.protobuf.StringValue PartnerHisAction = 4;
+      optional google.protobuf.StringValue PartnerHisReason = 5;
+      optional google.protobuf.Int32Value PartnerHisDatetime = 6;
+      optional google.protobuf.Int32Value IsActived = 7;
+}
+message DeletePartnerDocReviewHistoryRequest {
+      optional google.protobuf.Int32Value Id = 1;
+}
