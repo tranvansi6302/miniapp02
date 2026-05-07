@@ -28,9 +28,6 @@
     "paths": {
       "~/*": [
         "./src/*"
-      ],
-      "ejsc-ma-router": [
-        "../ejsc-ma-router/src"
       ]
     }
   },

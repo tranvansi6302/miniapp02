@@ -16,7 +16,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '~': path.resolve(dirname, './src'),
-      'ejsc-ma-router': path.resolve(dirname, '../ejsc-ma-router/src'),
       'react': path.resolve(dirname, './node_modules/react'),
       'react-dom': path.resolve(dirname, './node_modules/react-dom')
     },
@@ -24,7 +23,6 @@ export default defineConfig({
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'zustand'],
-    exclude: ['ejsc-ma-router']
   },
   build: {
     chunkSizeWarningLimit: 1500
