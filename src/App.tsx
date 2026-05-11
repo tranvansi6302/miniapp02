@@ -11,7 +11,7 @@ import { useAuthStore } from '~/stores/auth.store';
 import i18n from './locales/i18n';
 
 import './bridge/mockBridge';
-import '../../ejsc-ma-component/dist/styles.css';
+import 'ejsc-ma-component/dist/styles.css';
 import { langApi } from './apis/lang.api';
 import { serviceApi } from './apis/service.api';
 

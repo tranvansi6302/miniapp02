@@ -68,7 +68,7 @@ export const AuthService = {
     return (await authApi.login({
       Tel: normalizedPhone,
       Password: data.password
-    })) as LoginResponse;
+    })) as unknown as LoginResponse;
   },
 
   /**

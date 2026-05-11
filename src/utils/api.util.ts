@@ -29,8 +29,8 @@ export const handleResponse = <T>(response: CommonResult, defaultValue: T): T =>
         }
 
         // Sử dụng hệ thống lỗi động mới
-        const errorInfo = API_ERROR_MESSAGES[response.messageCode || 'AN_UNEXPECTED_ERROR_OCCURRED'];
-        const errorMessage = i18n.t(errorInfo.key, errorInfo.fallback);
+        const errorInfo = API_ERROR_MESSAGES[response.messageCode || 'AN_UNEXPECTED_ERROR_OCCURRED'] as { key: string; fallback?: string };
+        const errorMessage = i18n.t(errorInfo.key, errorInfo.fallback || errorInfo.key);
 
         throw {
             statusCode: response.statusCode,
@@ -51,7 +51,7 @@ const refreshAccessToken = async (): Promise<string | null> => {
         const { data: refreshToken } = await apisAsync.getStorage({ key: REFRESH_TOKEN_KEY })
         if (!refreshToken) return null
 
-        const res = await authApi.refreshToken?.({ refreshToken })
+        const res = await authApi.refreshToken?.({ refreshToken: refreshToken as unknown as string })
 
         const json = handleResponse<any>(
             res as unknown as CommonResult,
@@ -95,10 +95,10 @@ export const executeApiQuery = async <
     extraMeta?: Record<string, string>
 }): Promise<T> => {
     const callApi = async (token?: string, isRetry = false) => {
-        let activeToken = token;
+        let activeToken: string | undefined = token;
         if (isRetry) {
             const { data } = await apisAsync.getStorage({ key: ACCESS_TOKEN_KEY });
-            activeToken = data;
+            activeToken = data as unknown as string;
         }
 
         const metadata: Record<string, string> = {
@@ -125,7 +125,7 @@ export const executeApiQuery = async <
     try {
         console.log(`[API] Fetching token from native storage...`);
         const { data: token } = await apisAsync.getStorage({ key: ACCESS_TOKEN_KEY })
-        return await callApi(token || undefined)
+        return await callApi((token as unknown as string) || undefined)
     } catch (error: any) {
         const statusCode = error?.statusCode
 

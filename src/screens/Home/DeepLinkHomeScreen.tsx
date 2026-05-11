@@ -2,12 +2,31 @@
  * @file screens/Home/DeepLinkHomeScreen.tsx
  * @description Trang chủ tập trung vào DeepLink Navigation - Mini App 02.
  */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StandardPage, Text, Card, toast } from 'ejsc-ma-component';
-import { ExternalLink, CheckCircle2, XCircle } from 'lucide-react';
+import { ExternalLink, CheckCircle2, XCircle, User } from 'lucide-react';
+import { apisAsync } from 'ejsc-ma-api';
 
 const DeepLinkHomeScreen: React.FC = () => {
   const [lastResult, setLastResult] = useState<{ success: boolean; label: string } | null>(null);
+  const [userInfo, setUserInfo] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await apisAsync.getUserInfo();
+        if (res.success && res.data) {
+          setUserInfo(res.data);
+        }
+      } catch (e) {
+        console.error('Failed to fetch user info:', e);
+      }
+    };
+    fetchUser();
+  }, []);
+
+  const displayName = userInfo?.fullName || userInfo?.FullName || userInfo?.FirstName || userInfo?.name || 'Người dùng';
+  const displayEmail = userInfo?.email || userInfo?.Email || '';
 
   const openApp = async (appId: string, appName: string) => {
     try {
@@ -60,6 +79,19 @@ const DeepLinkHomeScreen: React.FC = () => {
 
       {/* Content Area - Increased Spacing from Header */}
       <div className="px-4 mt-6 pb-10 flex flex-col gap-6">
+        {/* Welcome Section */}
+        <Card className="rounded-3xl border-none shadow-none bg-indigo-50 p-6 flex items-center gap-4">
+          <div className="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center">
+            <User size={24} className="text-indigo-600" />
+          </div>
+          <div>
+            <Text variant="sub" className="text-indigo-800 opacity-70 block mb-0.5">Chào mừng quay lại,</Text>
+            <Text variant="base" weight="bold" className="text-indigo-900">
+              {displayName} {displayEmail ? `(${displayEmail})` : ''}
+            </Text>
+          </div>
+        </Card>
+
         <Card className="rounded-3xl border-none shadow-none bg-white p-6 flex flex-col gap-5">
           <Text variant="base" weight="bold" className="text-slate-700">Chuyển đến Mini App khác</Text>
           <div className="flex flex-col gap-4">

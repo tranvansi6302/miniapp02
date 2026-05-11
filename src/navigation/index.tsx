@@ -145,10 +145,10 @@ export const appRouterConfig: IRouterConfig = {
 /** Cấu hình Bottom Tab Bar */
 export const bottomTabBarConfig = {
   items: [
-    { id: 'home', name: 'Home', path: '/', icon: 'home' },
-    { id: 'api', name: 'APIs', path: '/api', icon: 'code' },
+    { id: 'home', name: 'Trang chủ', path: '/', icon: 'home' },
+    { id: 'api', name: 'API', path: '/api', icon: 'code' },
     { id: 'booking', name: 'Đặt lịch', path: '/booking', icon: 'calendar' },
-    { id: 'debugger', name: 'Link', path: '/activities', icon: 'link' },
+    { id: 'debugger', name: 'Liên kết', path: '/activities', icon: 'link' },
     { id: 'account', name: 'Tài khoản', path: '/account', icon: 'user' },
   ]
 };
