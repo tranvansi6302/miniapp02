@@ -230,6 +230,17 @@ if (typeof window !== 'undefined') {
     getImageInfo: createBridgeMethod('getImageInfo', (opts: any) =>
       opts.success?.({ width: 100, height: 100, path: opts.src, orientation: 'up', type: 'png' })),
 
+    getAppLanguage: createBridgeMethod('getAppLanguage', (opts: any) =>
+      opts.success?.({ language: 'vi' })),
+    getUserInfo: createBridgeMethod('getUserInfo', (opts: any) =>
+      opts.success?.({
+        isLoggedIn: true,
+        id: 'user_001',
+        fullName: 'Nguyễn Văn A',
+        email: 'vn@gmai.com',
+        avatarUrl: null,
+        phone: null
+      })),
     // Clipboard
     setClipboard: createBridgeMethod('setClipboard', (opts: any) => opts.success?.({})),
     getClipboard: createBridgeMethod('getClipboard', (opts: any) => opts.success?.({ text: 'Mocked clipboard text' })),

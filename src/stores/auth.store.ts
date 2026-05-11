@@ -13,15 +13,20 @@ export const useAuthStore = create<AuthState>((set) => ({
   accessToken: null,
   refreshToken: null,
   setAuth: (data) => {
-    // Trường hợp data là profile object trực tiếp (từ getStorage)
-    const userProfile = data.userProfile || data;
-    const accessToken = data.AccessToken || data.accessToken || null;
-    const refreshToken = data.RefreshToken || data.refreshToken || null;
+    if (!data) return;
     
-    set({ 
-      user: userProfile, 
-      accessToken,
-      refreshToken
+    // Nếu data truyền vào chỉ có token mà không có user (hoặc ngược lại), 
+    // chúng ta giữ lại giá trị cũ của store thay vì set null.
+    set((state) => {
+      const userProfile = data.userProfile || (data.id ? data : state.user);
+      const accessToken = data.AccessToken || data.accessToken || state.accessToken;
+      const refreshToken = data.RefreshToken || data.refreshToken || state.refreshToken;
+
+      return {
+        user: userProfile,
+        accessToken,
+        refreshToken
+      };
     });
   },
   logout: () => set({ user: null, accessToken: null, refreshToken: null }),

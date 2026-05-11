@@ -1,0 +1,28 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+import "common.proto";
+package BookingCatalogService;
+
+service BookingCatalogServiceQuery {
+  rpc GetAllBookingCatalogServices(GetAllBookingCatalogServicesRequest) returns (CommonResult);
+  rpc GetDetailBookingCatalogService(GetDetailBookingCatalogServiceRequest) returns (CommonResult);
+  rpc AdminGetAllBookingCatalogServices(AdminGetAllBookingCatalogServicesRequest) returns (CommonResult);
+}
+
+message GetAllBookingCatalogServicesRequest {
+      optional google.protobuf.StringValue SerName= 1;
+      optional google.protobuf.Int32Value ServPid= 2;
+      optional google.protobuf.BoolValue IsOnlyChildren= 3;
+      optional PagingOption PagingOption = 4;
+      repeated OrderByOption OrderBy = 5;
+}
+message GetDetailBookingCatalogServiceRequest {
+      optional google.protobuf.Int32Value Id = 1;
+}
+message AdminGetAllBookingCatalogServicesRequest {
+      optional SkipTakeOption SkipTakeOption = 1;
+      optional PagingOption PagingOption = 2;
+      repeated FilterOption Filter = 3;
+      repeated OrderByOption OrderBy = 4;
+}

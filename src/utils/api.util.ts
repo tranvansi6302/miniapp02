@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { CommonResult } from '~/apis/proto_new/Utils/result'
+import type { CommonResult } from '~/types/common/api.type'
 import type { UnaryCall } from '@protobuf-ts/runtime-rpc'
-import i18next from 'i18next'
+import i18n from '~/locales/i18n'
 import { API_ERROR_MESSAGES } from '~/locales/api-error-messages'
-import { authCommandApi } from '~/apis/auth/command/auth.command.api'
+import { authApi } from '~/apis/auth.api'
 import { apisAsync } from 'ejsc-ma-api'
 
 // ===== CONFIG =====
@@ -19,7 +19,7 @@ export const handleResponse = <T>(response: CommonResult, defaultValue: T): T =>
         if (response.statusCode === 200 || response.statusCode === 201) {
             if (!response.data) return defaultValue
 
-            console.log('API response data:', response.data)
+
 
             try {
                 return JSON.parse(response.data) as T
@@ -30,7 +30,7 @@ export const handleResponse = <T>(response: CommonResult, defaultValue: T): T =>
 
         // Sử dụng hệ thống lỗi động mới
         const errorInfo = API_ERROR_MESSAGES[response.messageCode || 'AN_UNEXPECTED_ERROR_OCCURRED'];
-        const errorMessage = i18next.t(errorInfo.key, errorInfo.fallback);
+        const errorMessage = i18n.t(errorInfo.key, errorInfo.fallback);
 
         throw {
             statusCode: response.statusCode,
@@ -38,7 +38,7 @@ export const handleResponse = <T>(response: CommonResult, defaultValue: T): T =>
             message: errorMessage,
             details: response.error || null
         }
-        
+
     } catch (error) {
         console.error('handleResponse -> error', error)
         throw error
@@ -48,10 +48,10 @@ export const handleResponse = <T>(response: CommonResult, defaultValue: T): T =>
 // ===== REFRESH TOKEN =====
 const refreshAccessToken = async (): Promise<string | null> => {
     try {
-        const { data: refreshToken } = await apisAsync.getStorage({ key: REFRESH_TOKEN_KEY }) as any
+        const { data: refreshToken } = await apisAsync.getStorage({ key: REFRESH_TOKEN_KEY })
         if (!refreshToken) return null
 
-        const res = await authCommandApi.refreshToken({ refreshToken: refreshToken as string })
+        const res = await authApi.refreshToken?.({ refreshToken })
 
         const json = handleResponse<any>(
             res as unknown as CommonResult,
@@ -97,8 +97,8 @@ export const executeApiQuery = async <
     const callApi = async (token?: string, isRetry = false) => {
         let activeToken = token;
         if (isRetry) {
-          const res = await apisAsync.getStorage({ key: ACCESS_TOKEN_KEY }) as any;
-          activeToken = res.data;
+            const { data } = await apisAsync.getStorage({ key: ACCESS_TOKEN_KEY });
+            activeToken = data;
         }
 
         const metadata: Record<string, string> = {
@@ -124,8 +124,7 @@ export const executeApiQuery = async <
 
     try {
         console.log(`[API] Fetching token from native storage...`);
-        const res = await apisAsync.getStorage({ key: ACCESS_TOKEN_KEY }) as any
-        const token = res.data
+        const { data: token } = await apisAsync.getStorage({ key: ACCESS_TOKEN_KEY })
         return await callApi(token || undefined)
     } catch (error: any) {
         const statusCode = error?.statusCode

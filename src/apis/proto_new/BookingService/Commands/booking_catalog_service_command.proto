@@ -1,0 +1,42 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "result.proto";
+package BookingCatalogService;
+
+service BookingCatalogServiceCommand {
+  rpc CreateBookingCatalogService(CreateBookingCatalogServiceRequest) returns (CommonResult);
+  rpc UpdateBookingCatalogService(UpdateBookingCatalogServiceRequest) returns (CommonResult);
+  rpc DeleteBookingCatalogService(DeleteBookingCatalogServiceRequest) returns (CommonResult);
+}
+
+message CreateBookingCatalogServiceRequest {
+      optional google.protobuf.Int32Value ServicePid = 1;
+      optional google.protobuf.StringValue SerCode = 2;
+      optional google.protobuf.StringValue SerName = 3;
+      optional google.protobuf.StringValue SerDescription = 4;
+      optional google.protobuf.StringValue SerContent = 5;
+      optional google.protobuf.StringValue SerIcon = 6;
+      optional google.protobuf.Int32Value SerType = 7;
+      repeated PartnerServiceRequirements PartnerServiceRequirementsMessage = 8;
+}
+message UpdateBookingCatalogServiceRequest {
+      optional google.protobuf.Int32Value Id = 1;
+      optional google.protobuf.Int32Value ServicePid = 2;
+      optional google.protobuf.StringValue SerCode = 3;
+      optional google.protobuf.StringValue SerName = 4;
+      optional google.protobuf.StringValue SerDescription = 5;
+      optional google.protobuf.StringValue SerContent = 6;
+      optional google.protobuf.StringValue SerIcon = 7;
+      optional google.protobuf.Int32Value SerType = 8;
+      optional google.protobuf.Int32Value SerCreatedDate = 9;
+      optional google.protobuf.Int32Value IsActived = 10;
+      repeated PartnerServiceRequirements PartnerServiceRequirementsMessage = 11;
+
+}
+message DeleteBookingCatalogServiceRequest {
+      optional google.protobuf.Int32Value Id = 1;
+}
+message PartnerServiceRequirements {
+      optional google.protobuf.Int32Value PartnerTypeId = 1;
+      optional google.protobuf.Int32Value PartnerReqDisplayOrder = 2;
+}

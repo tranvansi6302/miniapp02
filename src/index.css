@@ -1,52 +1,44 @@
 @font-face {
   font-family: 'SF Pro Display';
-  src: url('./fonts/SFProDisplay-Regular.otf') format('opentype');
+  src: url('./assets/fonts/SFProDisplay-Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'SF Pro Display';
-  src: url('./fonts/SFProDisplay-Medium.otf') format('opentype');
+  src: url('./assets/fonts/SFProDisplay-Medium.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'SF Pro Display';
-  src: url('./fonts/SFProDisplay-Semibold.otf') format('opentype');
+  src: url('./assets/fonts/SFProDisplay-Semibold.otf') format('opentype');
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'SF Pro Display';
-  src: url('./fonts/SFProDisplay-Bold.otf') format('opentype');
+  src: url('./assets/fonts/SFProDisplay-Bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
 }
 
 @import "tailwindcss";
 
-/**
- * SAFELIST FOR COMPONENT TEXT VARIANTS:
- * text-ejsc-h1 text-ejsc-h2 text-ejsc-h3 text-ejsc-h4 text-ejsc-base text-ejsc-sub text-ejsc-caption text-ejsc-tiny
- */
-
 :root {
-  /* ============================================================
-     EJSC SYSTEM TOKENS (HOMEBOOKING THEME)
-     ============================================================ */
+  /* 1. Core Colors - Blue for App 2 */
+  --ejsc-sys-primary: #3B82F6; 
 
-  /* 1. Core Colors - Đổi sang màu Cam Cát #F4A261 theo yêu cầu */
-  --ejsc-sys-primary: #F4A261;
   --ejsc-sys-success: #10B981;
   --ejsc-sys-warning: #F59E0B;
   --ejsc-sys-danger: #EF4444;
   --ejsc-sys-info: #3B82F6;
 
   /* 2. Surfaces & Backgrounds */
-  --ejsc-sys-bg-page: #F8FAFC;
+  --ejsc-sys-bg-page: #ffffff;
   --ejsc-sys-bg-card: #FFFFFF;
 
   /* 3. Typography */
@@ -57,7 +49,6 @@
   /* 4. Borders & Shapes */
   --ejsc-sys-border: #f0f5fb;
   --ejsc-sys-radius: 8px;
-  /* HomeBooking dùng bo góc tròn hơn chút */
 
   /* 5. Typography Sizes */
   --ejsc-sys-font-h1: 2.4rem;
@@ -66,12 +57,11 @@
   --ejsc-sys-font-base: 1.35rem;
   --ejsc-sys-font-sub: 1.25rem;
   --ejsc-sys-font-caption: 1.15rem;
-
 }
 
 @theme {
   --ejsc-brand-hex: var(--ejsc-sys-primary);
-  --ejsc-brand-sub-hex: #345C5A;
+  --ejsc-brand-sub-hex: #1E3A8A; 
   --ejsc-radius-unit: var(--ejsc-sys-radius);
 
   --color-ejsc-brand: var(--ejsc-sys-primary);
@@ -111,6 +101,7 @@
     height: 100%;
     width: 100%;
     overflow: hidden;
+    overscroll-behavior: none;
   }
 
   body,
@@ -125,6 +116,7 @@
     font-family: 'SF Pro Display', -apple-system, sans-serif;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
+    overscroll-behavior-y: none;
   }
 
   .app-layout {
@@ -149,8 +141,8 @@
     background: var(--color-ejsc-bg-page);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    /* Tối ưu GPU: Tạo layer riêng và hint trình duyệt không cần render nội dung ngoài khung hình */
-    will-change: scroll-position;
+    overscroll-behavior-y: contain;
+    scroll-padding-bottom: calc(12rem + env(safe-area-inset-bottom, 0px));
     contain: paint;
   }
 
@@ -158,38 +150,24 @@
     display: none;
   }
 
-  /* Force GPU for components that are often animated */
   .gpu-layer {
     transform: translateZ(0);
     backface-visibility: hidden;
     perspective: 1000;
     will-change: transform, opacity;
   }
-}
 
-/* ============================================================
-   DUAL RING LOADING ANIMATION
-   ============================================================ */
-.dual-loader {
-  width: 45px;
-  aspect-ratio: 1;
-  display: grid;
-  animation: dual-rotate 4s infinite;
-}
-.dual-loader::before,
-.dual-loader::after {    
-  content: "";
-  grid-area: 1/1;
-  border: 6px solid;
-  border-radius: 50%;
-  border-color: var(--ejsc-sys-primary) var(--ejsc-sys-primary) #0000 #0000;
-  mix-blend-mode: lighten; /* Đổi sang lighten vì nền đang là màu tối (dark overlay) */
-  animation: dual-rotate 1s infinite linear;
-}
-.dual-loader::after {
-  border-color: #0000 #0000 var(--ejsc-brand-sub-hex) var(--ejsc-brand-sub-hex);
-  animation-direction: reverse;
-}
-@keyframes dual-rotate { 
-  100% { transform: rotate(1turn) }
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
+
+  /* Force remove all shadows for a clean flat look */
+  header, [class*="app-bar"], .ejsc-app-bar {
+    box-shadow: none !important;
+    border-bottom: none !important;
+  }
+
+  .ejsc-card, [class*="card"] {
+    box-shadow: none !important;
+  }
 }

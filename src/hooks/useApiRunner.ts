@@ -46,7 +46,7 @@ export function useApiRunner() {
         const { level, message, data: extraData } = data;
         const icon = level === 'error' ? '❌' : level === 'warn' ? '⚠️' : '📱';
         const logContent = `[${timestamp}] ${icon} NATIVE LOG:\n${message}${extraData ? '\nData: ' + JSON.stringify(extraData, null, 2) : ''}`;
-        
+
         setLogs((prev) => ({
           ...prev,
           // Lưu vào một key đặc biệt dành cho log từ native
@@ -93,7 +93,7 @@ export function useApiRunner() {
       const previewItems: PreviewItem[] = [
         ...(res?.tempFiles?.map((f: any) => {
           const isVideo = f.fileType === 'video' || (f.path && f.path.match(/\.(mp4|mov|avi)$/i));
-          
+
           let src = '';
           if (f.base64) {
             src = f.base64.startsWith('data:') ? f.base64 : `data:image/jpeg;base64,${f.base64}`;
@@ -116,9 +116,9 @@ export function useApiRunner() {
       return res;
     } catch (error: any) {
       // Normalize lỗi sang dạng string hoặc JSON
-      const errMessage = 
-        typeof error === 'string' 
-          ? error 
+      const errMessage =
+        typeof error === 'string'
+          ? error
           : (error?.message || (error && Object.keys(error).length > 0 ? JSON.stringify(error, null, 2) : error?.toString() || 'Unknown Error'));
 
       setLogs((prev) => ({

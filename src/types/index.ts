@@ -15,8 +15,10 @@ export interface ApiEntry {
   name: string;
   /** Mô tả ngắn về chức năng */
   desc: string;
+  /** Tham số mặc định hoặc gợi ý (JSON string) */
+  params?: string;
   /** Hàm thực thi gọi API, trả về Promise */
-  fn: () => Promise<any>;
+  fn: (params?: any) => Promise<any>;
 }
 
 /** Nhóm các API liên quan */

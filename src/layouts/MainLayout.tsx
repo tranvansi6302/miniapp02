@@ -5,43 +5,29 @@
 import React, { useEffect } from 'react';
 import { useLocation, useRouterStore, useNavigate } from 'ejsc-ma-router';
 import type { IRouterStoreState } from 'ejsc-ma-router';
-import { BottomBar, useNavBar } from 'ejsc-ma-component';
+import { useNavBar } from 'ejsc-ma-component';
 import { apisAsync, type IEjscSetNavigationBarOptions } from 'ejsc-ma-api';
-import { getRouterConfig } from '../navigation/router-config';
-
-const routerConfigData = getRouterConfig();
-
-import { Home, LayoutGrid, Calendar, Sparkles, User, Search, History } from 'lucide-react';
+import { bottomTabBarConfig, appRouterConfig } from '../navigation';
+import { Home, LayoutGrid, Calendar, User, History } from 'lucide-react';
 
 /** 
  * Hàm ánh xạ tên icon sang Lucide icons. 
- * Giúp tùy biến giao diện thanh điều hướng dễ dàng.
  */
 const getIcon = (name: string) => {
   switch (name) {
-    case 'home':
-      return <Home size={20} />;
+    case 'home': return <Home size={20} />;
     case 'services':
-    case 'grid':
-      return <LayoutGrid size={20} />;
+    case 'grid': return <LayoutGrid size={20} />;
     case 'booking':
-    case 'calendar':
-      return <Calendar size={20} />;
+    case 'calendar': return <Calendar size={20} />;
     case 'activities':
-    case 'sparkles':
-    case 'history':
-      return <History size={20} />;
+    case 'history': return <History size={20} />;
     case 'account':
-    case 'user':
-      return <User size={20} />;
-    default:
-      return <Home size={20} />;
+    case 'user': return <User size={20} />;
+    default: return <Home size={20} />;
   }
 };
 
-/**
- * MemoizedBottomBar - Thanh điều hướng dưới cùng, tối ưu để không render lại khi trang cuộn.
- */
 interface IBottomBarProps {
   show: boolean;
   items: Array<{ path: string; icon: string; name: string }>;
@@ -111,74 +97,47 @@ interface MainLayoutProps {
   children?: React.ReactNode;
 }
 
-/**
- * MainLayout - Vỏ bọc ứng dụng, quản lý sự đồng bộ giữa Web và Native Navigation.
- */
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const pageLocation = useLocation();
-
-  // Lấy trạng thái Router từ Store
   const isTransitioning = useRouterStore((s: IRouterStoreState) => s.isPending);
   const histories = useRouterStore((s: IRouterStoreState) => s.histories);
   const globalLastHistory = histories[histories.length - 1];
-
-  // Kiểm tra instance Layout này có đang ở trên cùng (Active) không
   const isActive = globalLastHistory?.location?.key === pageLocation.key;
 
   const { updateNavBar } = useNavBar();
 
-  const currentPage = routerConfigData.pages.find(p => p.pathname === pageLocation.pathname);
-  const showAppBar = currentPage?.showAppBar ?? true;
-  const showBottomNav = currentPage?.showBottomNav ?? true;
+  const currentPage = appRouterConfig.pages.find(p => p.pathname === pageLocation.pathname);
+  const showBottomNav = true;
 
-  /** 
-   * Đồng bộ hóa Header (AppBar) giữa các môi trường.
-   * Khi một trang mới được mount, Layout sẽ báo cho Bridge và NavBarContext cập nhật UI.
-   */
   useEffect(() => {
     if (isActive && currentPage) {
-      // Thiết lập thanh điều hướng Native Bridge
       const navOptions: IEjscSetNavigationBarOptions = {
-        visible: false, // Luôn ẩn Native Bar để dùng Web Custom Bar cho mượt
+        visible: false,
         immersive: true,
-        title: currentPage.appBar.type === 'native' ? currentPage.appBar.title : '',
-        backIcon: currentPage.appBar.type === 'native' ? (currentPage.appBar.backIcon || (pageLocation.pathname === '/' ? 'none' : 'arrow')) : 'none'
+        title: currentPage.navigationBar?.title || '',
+        backIcon: currentPage.navigationBar?.backIcon || 'none'
       };
 
       apisAsync.setNavigationBar(navOptions);
-
-      // Cập nhật Simulator NavBar (Dùng cho môi trường Browser/Debug)
-      if (!showAppBar) {
-        updateNavBar({ visible: false, title: '', backIcon: 'none' });
-      } else if (currentPage.appBar.type === 'native') {
-        updateNavBar({
-          visible: true,
-          title: currentPage.appBar.title,
-          backIcon: currentPage.appBar.backIcon || (pageLocation.pathname === '/' ? 'none' : 'arrow')
-        });
-      } else {
-        updateNavBar({ visible: false, title: '', backIcon: 'none' });
-      }
+      updateNavBar(currentPage.navigationBar || { visible: false, title: '', backIcon: 'none' });
     }
-  }, [isActive, pageLocation.pathname, updateNavBar, currentPage, showAppBar]);
+  }, [isActive, pageLocation.pathname, updateNavBar, currentPage]);
 
   return (
     <div
       className="app-layout"
       style={{
-        pointerEvents: isTransitioning ? 'none' : 'auto', // Chặn tương tác khi đang animation chuyển trang
+        pointerEvents: isTransitioning ? 'none' : 'auto',
         background: 'var(--color-ejsc-bg-page)'
       }}
     >
-      {/* Vùng nội dung chính của trang */}
       <main className="app-main">
         {children}
       </main>
 
-      {/* Thanh Bottom Nav */}
       <MemoizedBottomBar
         show={showBottomNav}
-        items={routerConfigData.bottomTabBar.items}
+        items={bottomTabBarConfig.items}
         currentPath={pageLocation.pathname}
       />
     </div>
